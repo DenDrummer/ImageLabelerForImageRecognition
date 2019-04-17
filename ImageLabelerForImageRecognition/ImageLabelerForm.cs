@@ -23,7 +23,11 @@ namespace ImageLabelerForImageRecognition
 
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
-            //TODO: move to separate method
+            OpenFolder();
+        }
+
+        private void OpenFolder()
+        {
             #region open folder
             //create a new folder browser dialog
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -34,15 +38,25 @@ namespace ImageLabelerForImageRecognition
                 //open the folder browser dialog
                 DialogResult result = fbd.ShowDialog();
                 //if a valid folder has been selected
+                #region result handling
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     //load all file names (including the full path)
                     files = Directory.GetFiles(fbd.SelectedPath);
                     //TODO: filter only images
                     //TODO: allow recursive search
-                    //indicate a valid folder has been found and the loop can be exited
+                    //indicate a valid folder has been found so the loop can be exited
                     validFolder = true;
+                } //if the folder browsing is canceled or aborted
+                else if (result == DialogResult.Cancel || result == DialogResult.Abort)
+                {
+                    DialogResult dr = MessageBox.Show("Are you sure you wish to exit the program?", "", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        Application.Exit();
+                    }
                 }
+                #endregion
             }
             #endregion
 
@@ -62,10 +76,15 @@ namespace ImageLabelerForImageRecognition
             }
             else
             {
-                MessageBox.Show("No more images to label");
-                //TODO: allow to convert other folders by calling what is used on form load. Obviously ask user first.
-                //Exit program
-                Application.Exit();
+                DialogResult dr = MessageBox.Show("No more images to label in this folder.\nWould you like to convert another folder?", "No more images", MessageBoxButtons.YesNo);
+                if (dr==DialogResult.No)
+                {
+                    Application.Exit();
+                }
+                else if (dr==DialogResult.Yes)
+                {
+                    OpenFolder();
+                }
             }
         }
 
