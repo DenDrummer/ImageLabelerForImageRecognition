@@ -38,6 +38,9 @@
             this.ChunLiCheckBox = new System.Windows.Forms.CheckBox();
             this.BlankaCheckbox = new System.Windows.Forms.CheckBox();
             this.nextImageButton = new System.Windows.Forms.Button();
+            this.DhalsimCheckbox = new System.Windows.Forms.CheckBox();
+            this.EHondaCheckBox = new System.Windows.Forms.CheckBox();
+            this.GoroCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.GameGroupBox.SuspendLayout();
             this.MortalKombatGroupBox.SuspendLayout();
@@ -101,6 +104,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MortalKombatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MortalKombatGroupBox.Controls.Add(this.GoroCheckBox);
             this.MortalKombatGroupBox.Controls.Add(this.CageCheckbox);
             this.MortalKombatGroupBox.Location = new System.Drawing.Point(134, 383);
             this.MortalKombatGroupBox.Name = "MortalKombatGroupBox";
@@ -121,8 +125,11 @@
             // 
             // StreetFighter2GroupBox
             // 
+            this.StreetFighter2GroupBox.Controls.Add(this.EHondaCheckBox);
+            this.StreetFighter2GroupBox.Controls.Add(this.DhalsimCheckbox);
             this.StreetFighter2GroupBox.Controls.Add(this.ChunLiCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.BlankaCheckbox);
+            this.StreetFighter2GroupBox.Enabled = false;
             this.StreetFighter2GroupBox.Location = new System.Drawing.Point(534, 383);
             this.StreetFighter2GroupBox.Name = "StreetFighter2GroupBox";
             this.StreetFighter2GroupBox.Size = new System.Drawing.Size(395, 166);
@@ -155,6 +162,7 @@
             this.nextImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextImageButton.Enabled = false;
             this.nextImageButton.Font = new System.Drawing.Font("Lucida Console", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nextImageButton.Location = new System.Drawing.Point(935, 383);
             this.nextImageButton.Name = "nextImageButton";
@@ -163,6 +171,36 @@
             this.nextImageButton.Text = "→";
             this.nextImageButton.UseVisualStyleBackColor = true;
             this.nextImageButton.Click += new System.EventHandler(this.NextImageButton_Click);
+            // 
+            // DhalsimCheckbox
+            // 
+            this.DhalsimCheckbox.AutoSize = true;
+            this.DhalsimCheckbox.Location = new System.Drawing.Point(6, 65);
+            this.DhalsimCheckbox.Name = "DhalsimCheckbox";
+            this.DhalsimCheckbox.Size = new System.Drawing.Size(63, 17);
+            this.DhalsimCheckbox.TabIndex = 2;
+            this.DhalsimCheckbox.Text = "Dhalsim";
+            this.DhalsimCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // EHondaCheckBox
+            // 
+            this.EHondaCheckBox.AutoSize = true;
+            this.EHondaCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.EHondaCheckBox.Name = "EHondaCheckBox";
+            this.EHondaCheckBox.Size = new System.Drawing.Size(71, 17);
+            this.EHondaCheckBox.TabIndex = 3;
+            this.EHondaCheckBox.Text = "E. Honda";
+            this.EHondaCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // GoroCheckBox
+            // 
+            this.GoroCheckBox.AutoSize = true;
+            this.GoroCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.GoroCheckBox.Name = "GoroCheckBox";
+            this.GoroCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.GoroCheckBox.TabIndex = 1;
+            this.GoroCheckBox.Text = "Goro";
+            this.GoroCheckBox.UseVisualStyleBackColor = true;
             // 
             // ImageLabelerForm
             // 
@@ -204,5 +242,8 @@
         private System.Windows.Forms.CheckBox BlankaCheckbox;
         private System.Windows.Forms.CheckBox CageCheckbox;
         private System.Windows.Forms.CheckBox ChunLiCheckBox;
+        private System.Windows.Forms.CheckBox GoroCheckBox;
+        private System.Windows.Forms.CheckBox EHondaCheckBox;
+        private System.Windows.Forms.CheckBox DhalsimCheckbox;
     }
 }

@@ -84,6 +84,21 @@ namespace ImageLabelerForImageRecognition
         private void MortalKombatRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             DisableTagsExcept("Mortal Kombat");
+            MortalKombatGroupBox.Enabled = true;
+            EnableControls(MortalKombatGroupBox);
+        }
+
+        private void EnableControls(GroupBox gb)
+        {
+            foreach (Control c in gb.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox cb = (CheckBox)c;
+                    cb.Enabled = true;
+                }
+            }
+            nextImageButton.Enabled = true;
         }
 
         private void DisableTagsExcept(string game)
@@ -91,13 +106,29 @@ namespace ImageLabelerForImageRecognition
             #region Mortal Kombat
             if (!game.Equals("Mortal Kombat"))
             {
-                //TODO: disable Mortal Kombat tags
+                MortalKombatGroupBox.Enabled = false;
+                foreach (Control c in MortalKombatGroupBox.Controls)
+                {
+                    if (c is CheckBox)
+                    {
+                        CheckBox cb = (CheckBox)c;
+                        cb.Checked = false;
+                    }
+                }
             }
             #endregion
             #region Street Fighter II
             if (!game.Equals("Street Fighter II"))
             {
-                //TODO: disable Street Fighter II tags
+                StreetFighter2GroupBox.Enabled = false;
+                foreach (Control c in StreetFighter2GroupBox.Controls)
+                {
+                    if (c is CheckBox)
+                    {
+                        CheckBox cb = (CheckBox)c;
+                        cb.Checked = false;
+                    }
+                }
             }
             #endregion
         }
@@ -105,6 +136,7 @@ namespace ImageLabelerForImageRecognition
         private void StreetFighter2RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             DisableTagsExcept("Street Fighter II");
+            StreetFighter2GroupBox.Enabled = true;
         }
     }
 }
