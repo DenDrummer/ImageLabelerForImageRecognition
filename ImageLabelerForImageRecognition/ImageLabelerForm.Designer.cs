@@ -33,25 +33,26 @@
             this.StreetFighter2RadioButton = new System.Windows.Forms.RadioButton();
             this.MortalKombatRadioButton = new System.Windows.Forms.RadioButton();
             this.MortalKombatGroupBox = new System.Windows.Forms.GroupBox();
-            this.CageCheckbox = new System.Windows.Forms.CheckBox();
-            this.StreetFighter2GroupBox = new System.Windows.Forms.GroupBox();
-            this.ChunLiCheckBox = new System.Windows.Forms.CheckBox();
-            this.BlankaCheckbox = new System.Windows.Forms.CheckBox();
-            this.nextImageButton = new System.Windows.Forms.Button();
-            this.DhalsimCheckbox = new System.Windows.Forms.CheckBox();
-            this.EHondaCheckBox = new System.Windows.Forms.CheckBox();
-            this.GoroCheckBox = new System.Windows.Forms.CheckBox();
-            this.GuileCheckBox = new System.Windows.Forms.CheckBox();
-            this.KanoCheckBox = new System.Windows.Forms.CheckBox();
-            this.KenCheckBox = new System.Windows.Forms.CheckBox();
-            this.LiuKangCheckBox = new System.Windows.Forms.CheckBox();
-            this.RaidenCheckBox = new System.Windows.Forms.CheckBox();
-            this.RyuCheckBox = new System.Windows.Forms.CheckBox();
-            this.ScorpionCheckBox = new System.Windows.Forms.CheckBox();
-            this.ShangTsungCheckBox = new System.Windows.Forms.CheckBox();
-            this.SonyaCheckBox = new System.Windows.Forms.CheckBox();
-            this.ZangiefCheckBox = new System.Windows.Forms.CheckBox();
             this.SubZeroCheckBox = new System.Windows.Forms.CheckBox();
+            this.SonyaCheckBox = new System.Windows.Forms.CheckBox();
+            this.ShangTsungCheckBox = new System.Windows.Forms.CheckBox();
+            this.ScorpionCheckBox = new System.Windows.Forms.CheckBox();
+            this.RaidenCheckBox = new System.Windows.Forms.CheckBox();
+            this.LiuKangCheckBox = new System.Windows.Forms.CheckBox();
+            this.KanoCheckBox = new System.Windows.Forms.CheckBox();
+            this.GoroCheckBox = new System.Windows.Forms.CheckBox();
+            this.CageCheckBox = new System.Windows.Forms.CheckBox();
+            this.StreetFighter2GroupBox = new System.Windows.Forms.GroupBox();
+            this.ZangiefCheckBox = new System.Windows.Forms.CheckBox();
+            this.RyuCheckBox = new System.Windows.Forms.CheckBox();
+            this.KenCheckBox = new System.Windows.Forms.CheckBox();
+            this.GuileCheckBox = new System.Windows.Forms.CheckBox();
+            this.EHondaCheckBox = new System.Windows.Forms.CheckBox();
+            this.DhalsimCheckBox = new System.Windows.Forms.CheckBox();
+            this.ChunLiCheckBox = new System.Windows.Forms.CheckBox();
+            this.BlankaCheckBox = new System.Windows.Forms.CheckBox();
+            this.nextImageButton = new System.Windows.Forms.Button();
+            this.FileNameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.GameGroupBox.SuspendLayout();
             this.MortalKombatGroupBox.SuspendLayout();
@@ -63,9 +64,9 @@
             this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PictureBox.Location = new System.Drawing.Point(12, 12);
+            this.PictureBox.Location = new System.Drawing.Point(12, 28);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(960, 465);
+            this.PictureBox.Size = new System.Drawing.Size(960, 449);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
@@ -119,7 +120,7 @@
             this.MortalKombatGroupBox.Controls.Add(this.LiuKangCheckBox);
             this.MortalKombatGroupBox.Controls.Add(this.KanoCheckBox);
             this.MortalKombatGroupBox.Controls.Add(this.GoroCheckBox);
-            this.MortalKombatGroupBox.Controls.Add(this.CageCheckbox);
+            this.MortalKombatGroupBox.Controls.Add(this.CageCheckBox);
             this.MortalKombatGroupBox.Location = new System.Drawing.Point(134, 483);
             this.MortalKombatGroupBox.Name = "MortalKombatGroupBox";
             this.MortalKombatGroupBox.Size = new System.Drawing.Size(394, 166);
@@ -127,15 +128,95 @@
             this.MortalKombatGroupBox.TabStop = false;
             this.MortalKombatGroupBox.Text = "Mortal Kombat";
             // 
-            // CageCheckbox
+            // SubZeroCheckBox
             // 
-            this.CageCheckbox.AutoSize = true;
-            this.CageCheckbox.Location = new System.Drawing.Point(6, 19);
-            this.CageCheckbox.Name = "CageCheckbox";
-            this.CageCheckbox.Size = new System.Drawing.Size(51, 17);
-            this.CageCheckbox.TabIndex = 0;
-            this.CageCheckbox.Text = "Cage";
-            this.CageCheckbox.UseVisualStyleBackColor = true;
+            this.SubZeroCheckBox.AutoSize = true;
+            this.SubZeroCheckBox.Location = new System.Drawing.Point(80, 65);
+            this.SubZeroCheckBox.Name = "SubZeroCheckBox";
+            this.SubZeroCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.SubZeroCheckBox.TabIndex = 8;
+            this.SubZeroCheckBox.Text = "Sub-Zero";
+            this.SubZeroCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SonyaCheckBox
+            // 
+            this.SonyaCheckBox.AutoSize = true;
+            this.SonyaCheckBox.Location = new System.Drawing.Point(80, 42);
+            this.SonyaCheckBox.Name = "SonyaCheckBox";
+            this.SonyaCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.SonyaCheckBox.TabIndex = 7;
+            this.SonyaCheckBox.Text = "Sonya";
+            this.SonyaCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ShangTsungCheckBox
+            // 
+            this.ShangTsungCheckBox.AutoSize = true;
+            this.ShangTsungCheckBox.Location = new System.Drawing.Point(80, 19);
+            this.ShangTsungCheckBox.Name = "ShangTsungCheckBox";
+            this.ShangTsungCheckBox.Size = new System.Drawing.Size(90, 17);
+            this.ShangTsungCheckBox.TabIndex = 6;
+            this.ShangTsungCheckBox.Text = "Shang Tsung";
+            this.ShangTsungCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ScorpionCheckBox
+            // 
+            this.ScorpionCheckBox.AutoSize = true;
+            this.ScorpionCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.ScorpionCheckBox.Name = "ScorpionCheckBox";
+            this.ScorpionCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.ScorpionCheckBox.TabIndex = 5;
+            this.ScorpionCheckBox.Text = "Scorpion";
+            this.ScorpionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // RaidenCheckBox
+            // 
+            this.RaidenCheckBox.AutoSize = true;
+            this.RaidenCheckBox.Location = new System.Drawing.Point(6, 111);
+            this.RaidenCheckBox.Name = "RaidenCheckBox";
+            this.RaidenCheckBox.Size = new System.Drawing.Size(60, 17);
+            this.RaidenCheckBox.TabIndex = 4;
+            this.RaidenCheckBox.Text = "Raiden";
+            this.RaidenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // LiuKangCheckBox
+            // 
+            this.LiuKangCheckBox.AutoSize = true;
+            this.LiuKangCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.LiuKangCheckBox.Name = "LiuKangCheckBox";
+            this.LiuKangCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.LiuKangCheckBox.TabIndex = 3;
+            this.LiuKangCheckBox.Text = "Liu Kang";
+            this.LiuKangCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // KanoCheckBox
+            // 
+            this.KanoCheckBox.AutoSize = true;
+            this.KanoCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.KanoCheckBox.Name = "KanoCheckBox";
+            this.KanoCheckBox.Size = new System.Drawing.Size(51, 17);
+            this.KanoCheckBox.TabIndex = 2;
+            this.KanoCheckBox.Text = "Kano";
+            this.KanoCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // GoroCheckBox
+            // 
+            this.GoroCheckBox.AutoSize = true;
+            this.GoroCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.GoroCheckBox.Name = "GoroCheckBox";
+            this.GoroCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.GoroCheckBox.TabIndex = 1;
+            this.GoroCheckBox.Text = "Goro";
+            this.GoroCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // CageCheckBox
+            // 
+            this.CageCheckBox.AutoSize = true;
+            this.CageCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.CageCheckBox.Name = "CageCheckBox";
+            this.CageCheckBox.Size = new System.Drawing.Size(51, 17);
+            this.CageCheckBox.TabIndex = 0;
+            this.CageCheckBox.Text = "Cage";
+            this.CageCheckBox.UseVisualStyleBackColor = true;
             // 
             // StreetFighter2GroupBox
             // 
@@ -145,9 +226,9 @@
             this.StreetFighter2GroupBox.Controls.Add(this.KenCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.GuileCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.EHondaCheckBox);
-            this.StreetFighter2GroupBox.Controls.Add(this.DhalsimCheckbox);
+            this.StreetFighter2GroupBox.Controls.Add(this.DhalsimCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.ChunLiCheckBox);
-            this.StreetFighter2GroupBox.Controls.Add(this.BlankaCheckbox);
+            this.StreetFighter2GroupBox.Controls.Add(this.BlankaCheckBox);
             this.StreetFighter2GroupBox.Enabled = false;
             this.StreetFighter2GroupBox.Location = new System.Drawing.Point(534, 483);
             this.StreetFighter2GroupBox.Name = "StreetFighter2GroupBox";
@@ -155,6 +236,66 @@
             this.StreetFighter2GroupBox.TabIndex = 3;
             this.StreetFighter2GroupBox.TabStop = false;
             this.StreetFighter2GroupBox.Text = "Street Fighter II";
+            // 
+            // ZangiefCheckBox
+            // 
+            this.ZangiefCheckBox.AutoSize = true;
+            this.ZangiefCheckBox.Location = new System.Drawing.Point(83, 42);
+            this.ZangiefCheckBox.Name = "ZangiefCheckBox";
+            this.ZangiefCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.ZangiefCheckBox.TabIndex = 7;
+            this.ZangiefCheckBox.Text = "Zangief";
+            this.ZangiefCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // RyuCheckBox
+            // 
+            this.RyuCheckBox.AutoSize = true;
+            this.RyuCheckBox.Location = new System.Drawing.Point(83, 19);
+            this.RyuCheckBox.Name = "RyuCheckBox";
+            this.RyuCheckBox.Size = new System.Drawing.Size(45, 17);
+            this.RyuCheckBox.TabIndex = 6;
+            this.RyuCheckBox.Text = "Ryu";
+            this.RyuCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // KenCheckBox
+            // 
+            this.KenCheckBox.AutoSize = true;
+            this.KenCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.KenCheckBox.Name = "KenCheckBox";
+            this.KenCheckBox.Size = new System.Drawing.Size(45, 17);
+            this.KenCheckBox.TabIndex = 5;
+            this.KenCheckBox.Text = "Ken";
+            this.KenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // GuileCheckBox
+            // 
+            this.GuileCheckBox.AutoSize = true;
+            this.GuileCheckBox.Location = new System.Drawing.Point(6, 111);
+            this.GuileCheckBox.Name = "GuileCheckBox";
+            this.GuileCheckBox.Size = new System.Drawing.Size(50, 17);
+            this.GuileCheckBox.TabIndex = 4;
+            this.GuileCheckBox.Text = "Guile";
+            this.GuileCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // EHondaCheckBox
+            // 
+            this.EHondaCheckBox.AutoSize = true;
+            this.EHondaCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.EHondaCheckBox.Name = "EHondaCheckBox";
+            this.EHondaCheckBox.Size = new System.Drawing.Size(71, 17);
+            this.EHondaCheckBox.TabIndex = 3;
+            this.EHondaCheckBox.Text = "E. Honda";
+            this.EHondaCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DhalsimCheckBox
+            // 
+            this.DhalsimCheckBox.AutoSize = true;
+            this.DhalsimCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.DhalsimCheckBox.Name = "DhalsimCheckBox";
+            this.DhalsimCheckBox.Size = new System.Drawing.Size(63, 17);
+            this.DhalsimCheckBox.TabIndex = 2;
+            this.DhalsimCheckBox.Text = "Dhalsim";
+            this.DhalsimCheckBox.UseVisualStyleBackColor = true;
             // 
             // ChunLiCheckBox
             // 
@@ -166,15 +307,15 @@
             this.ChunLiCheckBox.Text = "Chun Li";
             this.ChunLiCheckBox.UseVisualStyleBackColor = true;
             // 
-            // BlankaCheckbox
+            // BlankaCheckBox
             // 
-            this.BlankaCheckbox.AutoSize = true;
-            this.BlankaCheckbox.Location = new System.Drawing.Point(6, 19);
-            this.BlankaCheckbox.Name = "BlankaCheckbox";
-            this.BlankaCheckbox.Size = new System.Drawing.Size(59, 17);
-            this.BlankaCheckbox.TabIndex = 0;
-            this.BlankaCheckbox.Text = "Blanka";
-            this.BlankaCheckbox.UseVisualStyleBackColor = true;
+            this.BlankaCheckBox.AutoSize = true;
+            this.BlankaCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.BlankaCheckBox.Name = "BlankaCheckBox";
+            this.BlankaCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.BlankaCheckBox.TabIndex = 0;
+            this.BlankaCheckBox.Text = "Blanka";
+            this.BlankaCheckBox.UseVisualStyleBackColor = true;
             // 
             // nextImageButton
             // 
@@ -188,151 +329,22 @@
             this.nextImageButton.UseVisualStyleBackColor = true;
             this.nextImageButton.Click += new System.EventHandler(this.NextImageButton_Click);
             // 
-            // DhalsimCheckbox
+            // FileNameLabel
             // 
-            this.DhalsimCheckbox.AutoSize = true;
-            this.DhalsimCheckbox.Location = new System.Drawing.Point(6, 65);
-            this.DhalsimCheckbox.Name = "DhalsimCheckbox";
-            this.DhalsimCheckbox.Size = new System.Drawing.Size(63, 17);
-            this.DhalsimCheckbox.TabIndex = 2;
-            this.DhalsimCheckbox.Text = "Dhalsim";
-            this.DhalsimCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // EHondaCheckBox
-            // 
-            this.EHondaCheckBox.AutoSize = true;
-            this.EHondaCheckBox.Location = new System.Drawing.Point(6, 88);
-            this.EHondaCheckBox.Name = "EHondaCheckBox";
-            this.EHondaCheckBox.Size = new System.Drawing.Size(71, 17);
-            this.EHondaCheckBox.TabIndex = 3;
-            this.EHondaCheckBox.Text = "E. Honda";
-            this.EHondaCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // GoroCheckBox
-            // 
-            this.GoroCheckBox.AutoSize = true;
-            this.GoroCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.GoroCheckBox.Name = "GoroCheckBox";
-            this.GoroCheckBox.Size = new System.Drawing.Size(49, 17);
-            this.GoroCheckBox.TabIndex = 1;
-            this.GoroCheckBox.Text = "Goro";
-            this.GoroCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // GuileCheckBox
-            // 
-            this.GuileCheckBox.AutoSize = true;
-            this.GuileCheckBox.Location = new System.Drawing.Point(6, 111);
-            this.GuileCheckBox.Name = "GuileCheckBox";
-            this.GuileCheckBox.Size = new System.Drawing.Size(50, 17);
-            this.GuileCheckBox.TabIndex = 4;
-            this.GuileCheckBox.Text = "Guile";
-            this.GuileCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // KanoCheckBox
-            // 
-            this.KanoCheckBox.AutoSize = true;
-            this.KanoCheckBox.Location = new System.Drawing.Point(6, 65);
-            this.KanoCheckBox.Name = "KanoCheckBox";
-            this.KanoCheckBox.Size = new System.Drawing.Size(51, 17);
-            this.KanoCheckBox.TabIndex = 2;
-            this.KanoCheckBox.Text = "Kano";
-            this.KanoCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // KenCheckBox
-            // 
-            this.KenCheckBox.AutoSize = true;
-            this.KenCheckBox.Location = new System.Drawing.Point(6, 134);
-            this.KenCheckBox.Name = "KenCheckBox";
-            this.KenCheckBox.Size = new System.Drawing.Size(45, 17);
-            this.KenCheckBox.TabIndex = 5;
-            this.KenCheckBox.Text = "Ken";
-            this.KenCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // LiuKangCheckBox
-            // 
-            this.LiuKangCheckBox.AutoSize = true;
-            this.LiuKangCheckBox.Location = new System.Drawing.Point(6, 88);
-            this.LiuKangCheckBox.Name = "LiuKangCheckBox";
-            this.LiuKangCheckBox.Size = new System.Drawing.Size(68, 17);
-            this.LiuKangCheckBox.TabIndex = 3;
-            this.LiuKangCheckBox.Text = "Liu Kang";
-            this.LiuKangCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // RaidenCheckBox
-            // 
-            this.RaidenCheckBox.AutoSize = true;
-            this.RaidenCheckBox.Location = new System.Drawing.Point(6, 111);
-            this.RaidenCheckBox.Name = "RaidenCheckBox";
-            this.RaidenCheckBox.Size = new System.Drawing.Size(60, 17);
-            this.RaidenCheckBox.TabIndex = 4;
-            this.RaidenCheckBox.Text = "Raiden";
-            this.RaidenCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // RyuCheckBox
-            // 
-            this.RyuCheckBox.AutoSize = true;
-            this.RyuCheckBox.Location = new System.Drawing.Point(83, 19);
-            this.RyuCheckBox.Name = "RyuCheckBox";
-            this.RyuCheckBox.Size = new System.Drawing.Size(45, 17);
-            this.RyuCheckBox.TabIndex = 6;
-            this.RyuCheckBox.Text = "Ryu";
-            this.RyuCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ScorpionCheckBox
-            // 
-            this.ScorpionCheckBox.AutoSize = true;
-            this.ScorpionCheckBox.Location = new System.Drawing.Point(6, 134);
-            this.ScorpionCheckBox.Name = "ScorpionCheckBox";
-            this.ScorpionCheckBox.Size = new System.Drawing.Size(68, 17);
-            this.ScorpionCheckBox.TabIndex = 5;
-            this.ScorpionCheckBox.Text = "Scorpion";
-            this.ScorpionCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ShangTsungCheckBox
-            // 
-            this.ShangTsungCheckBox.AutoSize = true;
-            this.ShangTsungCheckBox.Location = new System.Drawing.Point(80, 19);
-            this.ShangTsungCheckBox.Name = "ShangTsungCheckBox";
-            this.ShangTsungCheckBox.Size = new System.Drawing.Size(90, 17);
-            this.ShangTsungCheckBox.TabIndex = 6;
-            this.ShangTsungCheckBox.Text = "Shang Tsung";
-            this.ShangTsungCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SonyaCheckBox
-            // 
-            this.SonyaCheckBox.AutoSize = true;
-            this.SonyaCheckBox.Location = new System.Drawing.Point(80, 42);
-            this.SonyaCheckBox.Name = "SonyaCheckBox";
-            this.SonyaCheckBox.Size = new System.Drawing.Size(56, 17);
-            this.SonyaCheckBox.TabIndex = 7;
-            this.SonyaCheckBox.Text = "Sonya";
-            this.SonyaCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ZangiefCheckBox
-            // 
-            this.ZangiefCheckBox.AutoSize = true;
-            this.ZangiefCheckBox.Location = new System.Drawing.Point(83, 42);
-            this.ZangiefCheckBox.Name = "ZangiefCheckBox";
-            this.ZangiefCheckBox.Size = new System.Drawing.Size(62, 17);
-            this.ZangiefCheckBox.TabIndex = 7;
-            this.ZangiefCheckBox.Text = "Zangief";
-            this.ZangiefCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SubZeroCheckBox
-            // 
-            this.SubZeroCheckBox.AutoSize = true;
-            this.SubZeroCheckBox.Location = new System.Drawing.Point(80, 65);
-            this.SubZeroCheckBox.Name = "SubZeroCheckBox";
-            this.SubZeroCheckBox.Size = new System.Drawing.Size(70, 17);
-            this.SubZeroCheckBox.TabIndex = 8;
-            this.SubZeroCheckBox.Text = "Sub-Zero";
-            this.SubZeroCheckBox.UseVisualStyleBackColor = true;
+            this.FileNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FileNameLabel.Location = new System.Drawing.Point(12, 9);
+            this.FileNameLabel.Name = "FileNameLabel";
+            this.FileNameLabel.Size = new System.Drawing.Size(960, 16);
+            this.FileNameLabel.TabIndex = 5;
+            this.FileNameLabel.Text = "FileName";
             // 
             // ImageLabelerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.FileNameLabel);
             this.Controls.Add(this.nextImageButton);
             this.Controls.Add(this.StreetFighter2GroupBox);
             this.Controls.Add(this.MortalKombatGroupBox);
@@ -362,12 +374,12 @@
         private System.Windows.Forms.GroupBox StreetFighter2GroupBox;
         private System.Windows.Forms.Button nextImageButton;
         private System.Windows.Forms.GroupBox MortalKombatGroupBox;
-        private System.Windows.Forms.CheckBox BlankaCheckbox;
-        private System.Windows.Forms.CheckBox CageCheckbox;
+        private System.Windows.Forms.CheckBox BlankaCheckBox;
+        private System.Windows.Forms.CheckBox CageCheckBox;
         private System.Windows.Forms.CheckBox ChunLiCheckBox;
         private System.Windows.Forms.CheckBox GoroCheckBox;
         private System.Windows.Forms.CheckBox EHondaCheckBox;
-        private System.Windows.Forms.CheckBox DhalsimCheckbox;
+        private System.Windows.Forms.CheckBox DhalsimCheckBox;
         private System.Windows.Forms.CheckBox SubZeroCheckBox;
         private System.Windows.Forms.CheckBox SonyaCheckBox;
         private System.Windows.Forms.CheckBox ShangTsungCheckBox;
@@ -379,5 +391,6 @@
         private System.Windows.Forms.CheckBox RyuCheckBox;
         private System.Windows.Forms.CheckBox KenCheckBox;
         private System.Windows.Forms.CheckBox GuileCheckBox;
+        private System.Windows.Forms.Label FileNameLabel;
     }
 }

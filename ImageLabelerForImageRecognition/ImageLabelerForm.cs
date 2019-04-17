@@ -61,6 +61,7 @@ namespace ImageLabelerForImageRecognition
             if (currentFile < files.Length - 1)
             {
                 PictureBox.Image = Image.FromFile(files[++currentFile]);
+                FileNameLabel.Text = files[currentFile]; //.Split('/').Last();
             }
             else
             {
@@ -81,35 +82,68 @@ namespace ImageLabelerForImageRecognition
             #region build name
             //TODO: read game and tags and rename image accordingly
             StringBuilder newName = new StringBuilder();
-            #region find game
+            #region find game and tags
             RadioButton rb = GameGroupBox.Controls.OfType<RadioButton>().First(r => r.Checked);
             switch (rb.Name)
             {
                 case "MortalKombatRadioButton":
                     newName.Append("MK");
+                    #region MK tags
+                    if (CageCheckBox.Checked)
+                        newName.Append("_Cage");
+                    if (GoroCheckBox.Checked)
+                        newName.Append("_Goro");
+                    if (KanoCheckBox.Checked)
+                        newName.Append("_Kano");
+                    if (LiuKangCheckBox.Checked)
+                        newName.Append("_Liu Kang");
+                    if (RaidenCheckBox.Checked)
+                        newName.Append("_Raiden");
+                    if (ScorpionCheckBox.Checked)
+                        newName.Append("_Scorpion");
+                    if (ShangTsungCheckBox.Checked)
+                        newName.Append("_Shang Tsung");
+                    if (SonyaCheckBox.Checked)
+                        newName.Append("_Sonya");
+                    if (SubZeroCheckBox.Checked)
+                        newName.Append("Sub-Zero");
+                    #endregion
                     break;
                 case "StreetFighter2RadioButton":
                     newName.Append("SF2");
+                    #region SF2 tags
+                    if (BlankaCheckBox.Checked)
+                        newName.Append("_Blanka");
+                    if (ChunLiCheckBox.Checked)
+                        newName.Append("_Chun Li");
+                    if (DhalsimCheckBox.Checked)
+                        newName.Append("_Dhalsim");
+                    if (EHondaCheckBox.Checked)
+                        newName.Append("_E. Honda");
+                    if (GuileCheckBox.Checked)
+                        newName.Append("_Guile");
+                    if (KenCheckBox.Checked)
+                        newName.Append("_Ken");
+                    if (RyuCheckBox.Checked)
+                        newName.Append("_Ryu");
+                    if (ZangiefCheckBox.Checked)
+                        newName.Append("_Zangief");
+                    #endregion
                     break;
                 default:
                     MessageBox.Show($"UNRECOGNIZED RADIO BUTTON: {rb.Name}");
                     break;
             }
             #endregion
-            #region read player tags
-            //TODO: read player tags
+
+            // append a unique identifier and file extension
+            newName.Append($"_{currentFile}.jpg");
             #endregion
 
-            // append a unique identifier
-            newName.Append($"_{currentFile}");
-            #endregion
-
-            #region save new file
-            //TODO: save new file
-            #endregion
-
-            #region delete old file
-            //TODO: delete old file
+            #region rename file
+            string path = files[currentFile].Substring(0, files[currentFile].LastIndexOf('\\'));
+            PictureBox.Image.Dispose();
+            File.Move(files[currentFile], $"{path}\\{newName.ToString()}");
             #endregion
         }
 
