@@ -33,6 +33,7 @@ namespace ImageLabelerForImageRecognition
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     files = Directory.GetFiles(fbd.SelectedPath);
+                    //TODO: filter only images
                     validFolder = true;
                 }
             }
@@ -57,10 +58,19 @@ namespace ImageLabelerForImageRecognition
 
         private void NextFile()
         {
-            pictureBox.Image = Image.FromFile(files[++currentFile]);
+            if (currentFile < files.Length-1)
+            {
+                PictureBox.Image = Image.FromFile(files[++currentFile]);
+            }
+            else
+            {
+                MessageBox.Show("No more images to label");
+                //TODO: allow to convert other folders
+                Application.Exit();
+            }
         }
 
-        private void nextImageButton_Click(object sender, EventArgs e)
+        private void NextImageButton_Click(object sender, EventArgs e)
         {
             RenameImage();
             NextFile();
@@ -69,6 +79,32 @@ namespace ImageLabelerForImageRecognition
         private void RenameImage()
         {
             //TODO: read game and tags and rename image accordingly
+        }
+
+        private void MortalKombatRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableTagsExcept("Mortal Kombat");
+        }
+
+        private void DisableTagsExcept(string game)
+        {
+            #region Mortal Kombat
+            if (!game.Equals("Mortal Kombat"))
+            {
+                //TODO: disable Mortal Kombat tags
+            }
+            #endregion
+            #region Street Fighter II
+            if (!game.Equals("Street Fighter II"))
+            {
+                //TODO: disable Street Fighter II tags
+            }
+            #endregion
+        }
+
+        private void StreetFighter2RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            DisableTagsExcept("Street Fighter II");
         }
     }
 }

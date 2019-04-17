@@ -28,86 +28,126 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.gameGroupBox = new System.Windows.Forms.GroupBox();
-            this.mortalKombatRadioButton = new System.Windows.Forms.RadioButton();
-            this.streetFighterIIRadioButton = new System.Windows.Forms.RadioButton();
-            this.mortalKombatGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.GameGroupBox = new System.Windows.Forms.GroupBox();
+            this.StreetFighter2RadioButton = new System.Windows.Forms.RadioButton();
+            this.MortalKombatRadioButton = new System.Windows.Forms.RadioButton();
+            this.MortalKombatGroupBox = new System.Windows.Forms.GroupBox();
+            this.CageCheckbox = new System.Windows.Forms.CheckBox();
+            this.StreetFighter2GroupBox = new System.Windows.Forms.GroupBox();
+            this.ChunLiCheckBox = new System.Windows.Forms.CheckBox();
+            this.BlankaCheckbox = new System.Windows.Forms.CheckBox();
             this.nextImageButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            this.gameGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
+            this.GameGroupBox.SuspendLayout();
+            this.MortalKombatGroupBox.SuspendLayout();
+            this.StreetFighter2GroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox
+            // PictureBox
             // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(960, 365);
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
+            this.PictureBox.Location = new System.Drawing.Point(12, 12);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(960, 365);
+            this.PictureBox.TabIndex = 0;
+            this.PictureBox.TabStop = false;
             // 
-            // gameGroupBox
+            // GameGroupBox
             // 
-            this.gameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gameGroupBox.Controls.Add(this.streetFighterIIRadioButton);
-            this.gameGroupBox.Controls.Add(this.mortalKombatRadioButton);
-            this.gameGroupBox.Location = new System.Drawing.Point(12, 383);
-            this.gameGroupBox.Name = "gameGroupBox";
-            this.gameGroupBox.Size = new System.Drawing.Size(116, 166);
-            this.gameGroupBox.TabIndex = 1;
-            this.gameGroupBox.TabStop = false;
-            this.gameGroupBox.Text = "Game";
+            this.GameGroupBox.Controls.Add(this.StreetFighter2RadioButton);
+            this.GameGroupBox.Controls.Add(this.MortalKombatRadioButton);
+            this.GameGroupBox.Location = new System.Drawing.Point(12, 383);
+            this.GameGroupBox.Name = "GameGroupBox";
+            this.GameGroupBox.Size = new System.Drawing.Size(116, 166);
+            this.GameGroupBox.TabIndex = 1;
+            this.GameGroupBox.TabStop = false;
+            this.GameGroupBox.Text = "Game";
             // 
-            // mortalKombatRadioButton
+            // StreetFighter2RadioButton
             // 
-            this.mortalKombatRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.StreetFighter2RadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mortalKombatRadioButton.Location = new System.Drawing.Point(6, 42);
-            this.mortalKombatRadioButton.Name = "mortalKombatRadioButton";
-            this.mortalKombatRadioButton.Size = new System.Drawing.Size(104, 24);
-            this.mortalKombatRadioButton.TabIndex = 0;
-            this.mortalKombatRadioButton.TabStop = true;
-            this.mortalKombatRadioButton.Text = "Mortal Kombat";
-            this.mortalKombatRadioButton.UseVisualStyleBackColor = false;
+            this.StreetFighter2RadioButton.Location = new System.Drawing.Point(6, 49);
+            this.StreetFighter2RadioButton.Name = "StreetFighter2RadioButton";
+            this.StreetFighter2RadioButton.Size = new System.Drawing.Size(104, 24);
+            this.StreetFighter2RadioButton.TabIndex = 1;
+            this.StreetFighter2RadioButton.TabStop = true;
+            this.StreetFighter2RadioButton.Text = "Street Fighter II";
+            this.StreetFighter2RadioButton.UseVisualStyleBackColor = true;
+            this.StreetFighter2RadioButton.CheckedChanged += new System.EventHandler(this.StreetFighter2RadioButton_CheckedChanged);
             // 
-            // streetFighterIIRadioButton
+            // MortalKombatRadioButton
             // 
-            this.streetFighterIIRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.MortalKombatRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.streetFighterIIRadioButton.Location = new System.Drawing.Point(6, 92);
-            this.streetFighterIIRadioButton.Name = "streetFighterIIRadioButton";
-            this.streetFighterIIRadioButton.Size = new System.Drawing.Size(104, 24);
-            this.streetFighterIIRadioButton.TabIndex = 1;
-            this.streetFighterIIRadioButton.TabStop = true;
-            this.streetFighterIIRadioButton.Text = "Street Fighter II";
-            this.streetFighterIIRadioButton.UseVisualStyleBackColor = true;
+            this.MortalKombatRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.MortalKombatRadioButton.Name = "MortalKombatRadioButton";
+            this.MortalKombatRadioButton.Size = new System.Drawing.Size(104, 24);
+            this.MortalKombatRadioButton.TabIndex = 0;
+            this.MortalKombatRadioButton.TabStop = true;
+            this.MortalKombatRadioButton.Text = "Mortal Kombat";
+            this.MortalKombatRadioButton.UseVisualStyleBackColor = false;
+            this.MortalKombatRadioButton.CheckedChanged += new System.EventHandler(this.MortalKombatRadioButton_CheckedChanged);
             // 
-            // mortalKombatGroupBox
+            // MortalKombatGroupBox
             // 
-            this.mortalKombatGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.MortalKombatGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mortalKombatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mortalKombatGroupBox.Location = new System.Drawing.Point(134, 383);
-            this.mortalKombatGroupBox.Name = "mortalKombatGroupBox";
-            this.mortalKombatGroupBox.Size = new System.Drawing.Size(394, 166);
-            this.mortalKombatGroupBox.TabIndex = 2;
-            this.mortalKombatGroupBox.TabStop = false;
-            this.mortalKombatGroupBox.Text = "Mortal Kombat";
+            this.MortalKombatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MortalKombatGroupBox.Controls.Add(this.CageCheckbox);
+            this.MortalKombatGroupBox.Location = new System.Drawing.Point(134, 383);
+            this.MortalKombatGroupBox.Name = "MortalKombatGroupBox";
+            this.MortalKombatGroupBox.Size = new System.Drawing.Size(394, 166);
+            this.MortalKombatGroupBox.TabIndex = 2;
+            this.MortalKombatGroupBox.TabStop = false;
+            this.MortalKombatGroupBox.Text = "Mortal Kombat";
             // 
-            // groupBox1
+            // CageCheckbox
             // 
-            this.groupBox1.Location = new System.Drawing.Point(534, 383);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(395, 166);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.CageCheckbox.AutoSize = true;
+            this.CageCheckbox.Location = new System.Drawing.Point(6, 19);
+            this.CageCheckbox.Name = "CageCheckbox";
+            this.CageCheckbox.Size = new System.Drawing.Size(51, 17);
+            this.CageCheckbox.TabIndex = 0;
+            this.CageCheckbox.Text = "Cage";
+            this.CageCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // StreetFighter2GroupBox
+            // 
+            this.StreetFighter2GroupBox.Controls.Add(this.ChunLiCheckBox);
+            this.StreetFighter2GroupBox.Controls.Add(this.BlankaCheckbox);
+            this.StreetFighter2GroupBox.Location = new System.Drawing.Point(534, 383);
+            this.StreetFighter2GroupBox.Name = "StreetFighter2GroupBox";
+            this.StreetFighter2GroupBox.Size = new System.Drawing.Size(395, 166);
+            this.StreetFighter2GroupBox.TabIndex = 3;
+            this.StreetFighter2GroupBox.TabStop = false;
+            this.StreetFighter2GroupBox.Text = "Street Fighter II";
+            // 
+            // ChunLiCheckBox
+            // 
+            this.ChunLiCheckBox.AutoSize = true;
+            this.ChunLiCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.ChunLiCheckBox.Name = "ChunLiCheckBox";
+            this.ChunLiCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.ChunLiCheckBox.TabIndex = 1;
+            this.ChunLiCheckBox.Text = "Chun Li";
+            this.ChunLiCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // BlankaCheckbox
+            // 
+            this.BlankaCheckbox.AutoSize = true;
+            this.BlankaCheckbox.Location = new System.Drawing.Point(6, 19);
+            this.BlankaCheckbox.Name = "BlankaCheckbox";
+            this.BlankaCheckbox.Size = new System.Drawing.Size(59, 17);
+            this.BlankaCheckbox.TabIndex = 0;
+            this.BlankaCheckbox.Text = "Blanka";
+            this.BlankaCheckbox.UseVisualStyleBackColor = true;
             // 
             // nextImageButton
             // 
@@ -121,7 +161,7 @@
             this.nextImageButton.TabIndex = 4;
             this.nextImageButton.Text = "→";
             this.nextImageButton.UseVisualStyleBackColor = true;
-            this.nextImageButton.Click += new System.EventHandler(this.nextImageButton_Click);
+            this.nextImageButton.Click += new System.EventHandler(this.NextImageButton_Click);
             // 
             // ImageLabelerForm
             // 
@@ -129,10 +169,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.nextImageButton);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.mortalKombatGroupBox);
-            this.Controls.Add(this.gameGroupBox);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.StreetFighter2GroupBox);
+            this.Controls.Add(this.MortalKombatGroupBox);
+            this.Controls.Add(this.GameGroupBox);
+            this.Controls.Add(this.PictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -141,20 +181,27 @@
             this.ShowIcon = false;
             this.Text = "ImageLabelerForm";
             this.Load += new System.EventHandler(this.ImageLabelerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            this.gameGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
+            this.GameGroupBox.ResumeLayout(false);
+            this.MortalKombatGroupBox.ResumeLayout(false);
+            this.MortalKombatGroupBox.PerformLayout();
+            this.StreetFighter2GroupBox.ResumeLayout(false);
+            this.StreetFighter2GroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.GroupBox gameGroupBox;
-        private System.Windows.Forms.RadioButton streetFighterIIRadioButton;
-        private System.Windows.Forms.RadioButton mortalKombatRadioButton;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.GroupBox GameGroupBox;
+        private System.Windows.Forms.RadioButton StreetFighter2RadioButton;
+        private System.Windows.Forms.RadioButton MortalKombatRadioButton;
+        private System.Windows.Forms.GroupBox StreetFighter2GroupBox;
         private System.Windows.Forms.Button nextImageButton;
-        private System.Windows.Forms.GroupBox mortalKombatGroupBox;
+        private System.Windows.Forms.GroupBox MortalKombatGroupBox;
+        private System.Windows.Forms.CheckBox BlankaCheckbox;
+        private System.Windows.Forms.CheckBox CageCheckbox;
+        private System.Windows.Forms.CheckBox ChunLiCheckBox;
     }
 }
