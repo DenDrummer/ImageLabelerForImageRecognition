@@ -23,50 +23,48 @@ namespace ImageLabelerForImageRecognition
 
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
+            //TODO: move to separate method
             #region open folder
+            //create a new folder browser dialog
             FolderBrowserDialog fbd = new FolderBrowserDialog();
-            //extra: filter so only folders and jpg images are shown.
             bool validFolder = false;
+            //keep asking for a new folder until a valid folder has been selected
             while (!validFolder)
             {
+                //open the folder browser dialog
                 DialogResult result = fbd.ShowDialog();
+                //if a valid folder has been selected
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
+                    //load all file names (including the full path)
                     files = Directory.GetFiles(fbd.SelectedPath);
                     //TODO: filter only images
+                    //TODO: allow recursive search
+                    //indicate a valid folder has been found and the loop can be exited
                     validFolder = true;
                 }
             }
             #endregion
 
-            #region [old] print file paths
-            // this code was to see how the files are loaded in
-            //StringBuilder fileList = new StringBuilder();
-            //for (int i = 0; i < files.Length; i++)
-            //{
-            //    fileList.Append(files[i]);
-            //    if (i != files.Length - 1)
-            //    {
-            //        fileList.Append("\n");
-            //    }
-            //}
-            //MessageBox.Show(fileList.ToString());
-            #endregion
-
+            //open the first file
             NextFile();
         }
 
         private void NextFile()
         {
+            //if you're not on the last image
             if (currentFile < files.Length - 1)
             {
+                //load image into the picturebox
                 PictureBox.Image = Image.FromFile(files[++currentFile]);
+                //load filename with full path to the label
                 FileNameLabel.Text = files[currentFile]; //.Split('/').Last();
             }
             else
             {
                 MessageBox.Show("No more images to label");
-                //TODO: allow to convert other folders
+                //TODO: allow to convert other folders by calling what is used on form load. Obviously ask user first.
+                //Exit program
                 Application.Exit();
             }
         }
@@ -80,15 +78,18 @@ namespace ImageLabelerForImageRecognition
         private void RenameImage()
         {
             #region build name
-            //TODO: read game and tags and rename image accordingly
             StringBuilder newName = new StringBuilder();
+
             #region find game and tags
+            //find selected radio button. each radio button corresponds to a game
             RadioButton rb = GameGroupBox.Controls.OfType<RadioButton>().First(r => r.Checked);
             switch (rb.Name)
             {
                 case "MortalKombatRadioButton":
+                    //set game
                     newName.Append("MK");
                     #region MK tags
+                    //append a tag for each character the user indicated to be visible on screen
                     if (CageCheckBox.Checked)
                         newName.Append("_Cage");
                     if (GoroCheckBox.Checked)
@@ -106,12 +107,14 @@ namespace ImageLabelerForImageRecognition
                     if (SonyaCheckBox.Checked)
                         newName.Append("_Sonya");
                     if (SubZeroCheckBox.Checked)
-                        newName.Append("Sub-Zero");
+                        newName.Append("_Sub-Zero");
                     #endregion
                     break;
                 case "StreetFighter2RadioButton":
+                    //set game
                     newName.Append("SF2");
                     #region SF2 tags
+                    //append a tag for each character the user indicated to be visible on screen
                     if (BlankaCheckBox.Checked)
                         newName.Append("_Blanka");
                     if (ChunLiCheckBox.Checked)
@@ -141,8 +144,11 @@ namespace ImageLabelerForImageRecognition
             #endregion
 
             #region rename file
+            //get the pathe to the folder where the image was found
             string path = files[currentFile].Substring(0, files[currentFile].LastIndexOf('\\'));
+            //dispose original image so it's no longer used by the program and it can be renamed
             PictureBox.Image.Dispose();
+            //rename file
             File.Move(files[currentFile], $"{path}\\{newName.ToString()}");
             #endregion
         }
@@ -155,9 +161,12 @@ namespace ImageLabelerForImageRecognition
         private void DisableTagsExcept(string game)
         {
             #region Mortal Kombat
+            //if game is not MK
             if (!game.Equals("Mortal Kombat"))
             {
+                //disable the MK GroupBox
                 MortalKombatGroupBox.Enabled = false;
+                //and uncheck all checkboxes in the MK GroupBox
                 foreach (CheckBox cb in MortalKombatGroupBox.Controls.OfType<CheckBox>())
                 {
                     cb.Checked = false;
@@ -165,9 +174,12 @@ namespace ImageLabelerForImageRecognition
             }
             #endregion
             #region Street Fighter II
+            //if game is not SF2
             if (!game.Equals("Street Fighter II"))
             {
+                //disable the SF2 GroupBox
                 StreetFighter2GroupBox.Enabled = false;
+                //and uncheck all checkboxes in the SF2 GroupBox
                 foreach (CheckBox cb in StreetFighter2GroupBox.Controls.OfType<CheckBox>())
                 {
                     cb.Checked = false;
@@ -184,6 +196,7 @@ namespace ImageLabelerForImageRecognition
         private void ChangeGame(string game, GroupBox gb)
         {
             DisableTagsExcept(game);
+            //re-enable the GroupBox related to the selected game
             gb.Enabled = true;
         }
     }
