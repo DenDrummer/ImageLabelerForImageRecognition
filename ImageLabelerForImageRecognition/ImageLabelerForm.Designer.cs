@@ -41,6 +41,17 @@
             this.DhalsimCheckbox = new System.Windows.Forms.CheckBox();
             this.EHondaCheckBox = new System.Windows.Forms.CheckBox();
             this.GoroCheckBox = new System.Windows.Forms.CheckBox();
+            this.GuileCheckBox = new System.Windows.Forms.CheckBox();
+            this.KanoCheckBox = new System.Windows.Forms.CheckBox();
+            this.KenCheckBox = new System.Windows.Forms.CheckBox();
+            this.LiuKangCheckBox = new System.Windows.Forms.CheckBox();
+            this.RaidenCheckBox = new System.Windows.Forms.CheckBox();
+            this.RyuCheckBox = new System.Windows.Forms.CheckBox();
+            this.ScorpionCheckBox = new System.Windows.Forms.CheckBox();
+            this.ShangTsungCheckBox = new System.Windows.Forms.CheckBox();
+            this.SonyaCheckBox = new System.Windows.Forms.CheckBox();
+            this.ZangiefCheckBox = new System.Windows.Forms.CheckBox();
+            this.SubZeroCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.GameGroupBox.SuspendLayout();
             this.MortalKombatGroupBox.SuspendLayout();
@@ -49,23 +60,22 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.PictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PictureBox.Location = new System.Drawing.Point(12, 12);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(960, 365);
+            this.PictureBox.Size = new System.Drawing.Size(960, 465);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             // 
             // GameGroupBox
             // 
-            this.GameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.GameGroupBox.Controls.Add(this.StreetFighter2RadioButton);
             this.GameGroupBox.Controls.Add(this.MortalKombatRadioButton);
-            this.GameGroupBox.Location = new System.Drawing.Point(12, 383);
+            this.GameGroupBox.Location = new System.Drawing.Point(12, 483);
             this.GameGroupBox.Name = "GameGroupBox";
             this.GameGroupBox.Size = new System.Drawing.Size(116, 166);
             this.GameGroupBox.TabIndex = 1;
@@ -100,13 +110,17 @@
             // 
             // MortalKombatGroupBox
             // 
-            this.MortalKombatGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MortalKombatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MortalKombatGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.MortalKombatGroupBox.Controls.Add(this.SubZeroCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.SonyaCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.ShangTsungCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.ScorpionCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.RaidenCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.LiuKangCheckBox);
+            this.MortalKombatGroupBox.Controls.Add(this.KanoCheckBox);
             this.MortalKombatGroupBox.Controls.Add(this.GoroCheckBox);
             this.MortalKombatGroupBox.Controls.Add(this.CageCheckbox);
-            this.MortalKombatGroupBox.Location = new System.Drawing.Point(134, 383);
+            this.MortalKombatGroupBox.Location = new System.Drawing.Point(134, 483);
             this.MortalKombatGroupBox.Name = "MortalKombatGroupBox";
             this.MortalKombatGroupBox.Size = new System.Drawing.Size(394, 166);
             this.MortalKombatGroupBox.TabIndex = 2;
@@ -125,12 +139,17 @@
             // 
             // StreetFighter2GroupBox
             // 
+            this.StreetFighter2GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StreetFighter2GroupBox.Controls.Add(this.ZangiefCheckBox);
+            this.StreetFighter2GroupBox.Controls.Add(this.RyuCheckBox);
+            this.StreetFighter2GroupBox.Controls.Add(this.KenCheckBox);
+            this.StreetFighter2GroupBox.Controls.Add(this.GuileCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.EHondaCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.DhalsimCheckbox);
             this.StreetFighter2GroupBox.Controls.Add(this.ChunLiCheckBox);
             this.StreetFighter2GroupBox.Controls.Add(this.BlankaCheckbox);
             this.StreetFighter2GroupBox.Enabled = false;
-            this.StreetFighter2GroupBox.Location = new System.Drawing.Point(534, 383);
+            this.StreetFighter2GroupBox.Location = new System.Drawing.Point(534, 483);
             this.StreetFighter2GroupBox.Name = "StreetFighter2GroupBox";
             this.StreetFighter2GroupBox.Size = new System.Drawing.Size(395, 166);
             this.StreetFighter2GroupBox.TabIndex = 3;
@@ -159,12 +178,9 @@
             // 
             // nextImageButton
             // 
-            this.nextImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextImageButton.Enabled = false;
+            this.nextImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nextImageButton.Font = new System.Drawing.Font("Lucida Console", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nextImageButton.Location = new System.Drawing.Point(935, 383);
+            this.nextImageButton.Location = new System.Drawing.Point(935, 483);
             this.nextImageButton.Name = "nextImageButton";
             this.nextImageButton.Size = new System.Drawing.Size(37, 166);
             this.nextImageButton.TabIndex = 4;
@@ -202,19 +218,126 @@
             this.GoroCheckBox.Text = "Goro";
             this.GoroCheckBox.UseVisualStyleBackColor = true;
             // 
+            // GuileCheckBox
+            // 
+            this.GuileCheckBox.AutoSize = true;
+            this.GuileCheckBox.Location = new System.Drawing.Point(6, 111);
+            this.GuileCheckBox.Name = "GuileCheckBox";
+            this.GuileCheckBox.Size = new System.Drawing.Size(50, 17);
+            this.GuileCheckBox.TabIndex = 4;
+            this.GuileCheckBox.Text = "Guile";
+            this.GuileCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // KanoCheckBox
+            // 
+            this.KanoCheckBox.AutoSize = true;
+            this.KanoCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.KanoCheckBox.Name = "KanoCheckBox";
+            this.KanoCheckBox.Size = new System.Drawing.Size(51, 17);
+            this.KanoCheckBox.TabIndex = 2;
+            this.KanoCheckBox.Text = "Kano";
+            this.KanoCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // KenCheckBox
+            // 
+            this.KenCheckBox.AutoSize = true;
+            this.KenCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.KenCheckBox.Name = "KenCheckBox";
+            this.KenCheckBox.Size = new System.Drawing.Size(45, 17);
+            this.KenCheckBox.TabIndex = 5;
+            this.KenCheckBox.Text = "Ken";
+            this.KenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // LiuKangCheckBox
+            // 
+            this.LiuKangCheckBox.AutoSize = true;
+            this.LiuKangCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.LiuKangCheckBox.Name = "LiuKangCheckBox";
+            this.LiuKangCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.LiuKangCheckBox.TabIndex = 3;
+            this.LiuKangCheckBox.Text = "Liu Kang";
+            this.LiuKangCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // RaidenCheckBox
+            // 
+            this.RaidenCheckBox.AutoSize = true;
+            this.RaidenCheckBox.Location = new System.Drawing.Point(6, 111);
+            this.RaidenCheckBox.Name = "RaidenCheckBox";
+            this.RaidenCheckBox.Size = new System.Drawing.Size(60, 17);
+            this.RaidenCheckBox.TabIndex = 4;
+            this.RaidenCheckBox.Text = "Raiden";
+            this.RaidenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // RyuCheckBox
+            // 
+            this.RyuCheckBox.AutoSize = true;
+            this.RyuCheckBox.Location = new System.Drawing.Point(83, 19);
+            this.RyuCheckBox.Name = "RyuCheckBox";
+            this.RyuCheckBox.Size = new System.Drawing.Size(45, 17);
+            this.RyuCheckBox.TabIndex = 6;
+            this.RyuCheckBox.Text = "Ryu";
+            this.RyuCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ScorpionCheckBox
+            // 
+            this.ScorpionCheckBox.AutoSize = true;
+            this.ScorpionCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.ScorpionCheckBox.Name = "ScorpionCheckBox";
+            this.ScorpionCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.ScorpionCheckBox.TabIndex = 5;
+            this.ScorpionCheckBox.Text = "Scorpion";
+            this.ScorpionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ShangTsungCheckBox
+            // 
+            this.ShangTsungCheckBox.AutoSize = true;
+            this.ShangTsungCheckBox.Location = new System.Drawing.Point(80, 19);
+            this.ShangTsungCheckBox.Name = "ShangTsungCheckBox";
+            this.ShangTsungCheckBox.Size = new System.Drawing.Size(90, 17);
+            this.ShangTsungCheckBox.TabIndex = 6;
+            this.ShangTsungCheckBox.Text = "Shang Tsung";
+            this.ShangTsungCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SonyaCheckBox
+            // 
+            this.SonyaCheckBox.AutoSize = true;
+            this.SonyaCheckBox.Location = new System.Drawing.Point(80, 42);
+            this.SonyaCheckBox.Name = "SonyaCheckBox";
+            this.SonyaCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.SonyaCheckBox.TabIndex = 7;
+            this.SonyaCheckBox.Text = "Sonya";
+            this.SonyaCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ZangiefCheckBox
+            // 
+            this.ZangiefCheckBox.AutoSize = true;
+            this.ZangiefCheckBox.Location = new System.Drawing.Point(83, 42);
+            this.ZangiefCheckBox.Name = "ZangiefCheckBox";
+            this.ZangiefCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.ZangiefCheckBox.TabIndex = 7;
+            this.ZangiefCheckBox.Text = "Zangief";
+            this.ZangiefCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // SubZeroCheckBox
+            // 
+            this.SubZeroCheckBox.AutoSize = true;
+            this.SubZeroCheckBox.Location = new System.Drawing.Point(80, 65);
+            this.SubZeroCheckBox.Name = "SubZeroCheckBox";
+            this.SubZeroCheckBox.Size = new System.Drawing.Size(70, 17);
+            this.SubZeroCheckBox.TabIndex = 8;
+            this.SubZeroCheckBox.Text = "Sub-Zero";
+            this.SubZeroCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ImageLabelerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.nextImageButton);
             this.Controls.Add(this.StreetFighter2GroupBox);
             this.Controls.Add(this.MortalKombatGroupBox);
             this.Controls.Add(this.GameGroupBox);
             this.Controls.Add(this.PictureBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "ImageLabelerForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ShowIcon = false;
@@ -245,5 +368,16 @@
         private System.Windows.Forms.CheckBox GoroCheckBox;
         private System.Windows.Forms.CheckBox EHondaCheckBox;
         private System.Windows.Forms.CheckBox DhalsimCheckbox;
+        private System.Windows.Forms.CheckBox SubZeroCheckBox;
+        private System.Windows.Forms.CheckBox SonyaCheckBox;
+        private System.Windows.Forms.CheckBox ShangTsungCheckBox;
+        private System.Windows.Forms.CheckBox ScorpionCheckBox;
+        private System.Windows.Forms.CheckBox RaidenCheckBox;
+        private System.Windows.Forms.CheckBox LiuKangCheckBox;
+        private System.Windows.Forms.CheckBox KanoCheckBox;
+        private System.Windows.Forms.CheckBox ZangiefCheckBox;
+        private System.Windows.Forms.CheckBox RyuCheckBox;
+        private System.Windows.Forms.CheckBox KenCheckBox;
+        private System.Windows.Forms.CheckBox GuileCheckBox;
     }
 }

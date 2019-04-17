@@ -58,7 +58,7 @@ namespace ImageLabelerForImageRecognition
 
         private void NextFile()
         {
-            if (currentFile < files.Length-1)
+            if (currentFile < files.Length - 1)
             {
                 PictureBox.Image = Image.FromFile(files[++currentFile]);
             }
@@ -78,27 +78,44 @@ namespace ImageLabelerForImageRecognition
 
         private void RenameImage()
         {
+            #region build name
             //TODO: read game and tags and rename image accordingly
+            StringBuilder newName = new StringBuilder();
+            #region find game
+            RadioButton rb = GameGroupBox.Controls.OfType<RadioButton>().First(r => r.Checked);
+            switch (rb.Name)
+            {
+                case "MortalKombatRadioButton":
+                    newName.Append("MK");
+                    break;
+                case "StreetFighter2RadioButton":
+                    newName.Append("SF2");
+                    break;
+                default:
+                    MessageBox.Show($"UNRECOGNIZED RADIO BUTTON: {rb.Name}");
+                    break;
+            }
+            #endregion
+            #region read player tags
+            //TODO: read player tags
+            #endregion
+
+            // append a unique identifier
+            newName.Append($"_{currentFile}");
+            #endregion
+
+            #region save new file
+            //TODO: save new file
+            #endregion
+
+            #region delete old file
+            //TODO: delete old file
+            #endregion
         }
 
         private void MortalKombatRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            DisableTagsExcept("Mortal Kombat");
-            MortalKombatGroupBox.Enabled = true;
-            EnableControls(MortalKombatGroupBox);
-        }
-
-        private void EnableControls(GroupBox gb)
-        {
-            foreach (Control c in gb.Controls)
-            {
-                if (c is CheckBox)
-                {
-                    CheckBox cb = (CheckBox)c;
-                    cb.Enabled = true;
-                }
-            }
-            nextImageButton.Enabled = true;
+            ChangeGame("Mortal Kombat", MortalKombatGroupBox);
         }
 
         private void DisableTagsExcept(string game)
@@ -107,13 +124,9 @@ namespace ImageLabelerForImageRecognition
             if (!game.Equals("Mortal Kombat"))
             {
                 MortalKombatGroupBox.Enabled = false;
-                foreach (Control c in MortalKombatGroupBox.Controls)
+                foreach (CheckBox cb in MortalKombatGroupBox.Controls.OfType<CheckBox>())
                 {
-                    if (c is CheckBox)
-                    {
-                        CheckBox cb = (CheckBox)c;
-                        cb.Checked = false;
-                    }
+                    cb.Checked = false;
                 }
             }
             #endregion
@@ -121,13 +134,9 @@ namespace ImageLabelerForImageRecognition
             if (!game.Equals("Street Fighter II"))
             {
                 StreetFighter2GroupBox.Enabled = false;
-                foreach (Control c in StreetFighter2GroupBox.Controls)
+                foreach (CheckBox cb in StreetFighter2GroupBox.Controls.OfType<CheckBox>())
                 {
-                    if (c is CheckBox)
-                    {
-                        CheckBox cb = (CheckBox)c;
-                        cb.Checked = false;
-                    }
+                    cb.Checked = false;
                 }
             }
             #endregion
@@ -135,8 +144,13 @@ namespace ImageLabelerForImageRecognition
 
         private void StreetFighter2RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            DisableTagsExcept("Street Fighter II");
-            StreetFighter2GroupBox.Enabled = true;
+            ChangeGame("Street Fighter II", StreetFighter2GroupBox);
+        }
+
+        private void ChangeGame(string game, GroupBox gb)
+        {
+            DisableTagsExcept(game);
+            gb.Enabled = true;
         }
     }
 }
