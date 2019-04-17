@@ -60,6 +60,10 @@ namespace ImageLabelerForImageRecognition
             }
             #endregion
 
+            //TODO: bring application to front
+            WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Normal;
+
             //open the first file
             NextFile();
         }
