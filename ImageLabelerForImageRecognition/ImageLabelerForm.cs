@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ImageLabelerForImageRecognition
@@ -30,7 +26,9 @@ namespace ImageLabelerForImageRecognition
         {
             #region open folder
             //create a new folder browser dialog
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            //(now part of the actual form)
+            //FolderBrowserDialog fbd = new FolderBrowserDialog(); 
+
             bool validFolder = false;
             //keep asking for a new folder until a valid folder has been selected
             while (!validFolder)
@@ -60,7 +58,7 @@ namespace ImageLabelerForImageRecognition
             }
             #endregion
 
-            //TODO: bring application to front
+            // bring application to front
             WindowState = FormWindowState.Minimized;
             WindowState = FormWindowState.Normal;
 
@@ -81,11 +79,11 @@ namespace ImageLabelerForImageRecognition
             else
             {
                 DialogResult dr = MessageBox.Show("No more images to label in this folder.\nWould you like to convert another folder?", "No more images", MessageBoxButtons.YesNo);
-                if (dr==DialogResult.No)
+                if (dr == DialogResult.No)
                 {
                     Application.Exit();
                 }
-                else if (dr==DialogResult.Yes)
+                else if (dr == DialogResult.Yes)
                 {
                     OpenFolder();
                 }
@@ -103,7 +101,7 @@ namespace ImageLabelerForImageRecognition
             #region build name
             StringBuilder newName = new StringBuilder();
 
-            #region find game and tags
+            #region find game
             //find selected radio button. each radio button corresponds to a game
             RadioButton rb = GameGroupBox.Controls.OfType<RadioButton>().First(r => r.Checked);
             switch (rb.Name)
@@ -111,55 +109,29 @@ namespace ImageLabelerForImageRecognition
                 case "MortalKombatRadioButton":
                     //set game
                     newName.Append("MK");
-                    #region MK tags
-                    //append a tag for each character the user indicated to be visible on screen
-                    if (CageCheckBox.Checked)
-                        newName.Append("_Cage");
-                    if (GoroCheckBox.Checked)
-                        newName.Append("_Goro");
-                    if (KanoCheckBox.Checked)
-                        newName.Append("_Kano");
-                    if (LiuKangCheckBox.Checked)
-                        newName.Append("_Liu Kang");
-                    if (RaidenCheckBox.Checked)
-                        newName.Append("_Raiden");
-                    if (ScorpionCheckBox.Checked)
-                        newName.Append("_Scorpion");
-                    if (ShangTsungCheckBox.Checked)
-                        newName.Append("_Shang Tsung");
-                    if (SonyaCheckBox.Checked)
-                        newName.Append("_Sonya");
-                    if (SubZeroCheckBox.Checked)
-                        newName.Append("_Sub-Zero");
-                    #endregion
                     break;
                 case "StreetFighter2RadioButton":
                     //set game
                     newName.Append("SF2");
-                    #region SF2 tags
-                    //append a tag for each character the user indicated to be visible on screen
-                    if (BlankaCheckBox.Checked)
-                        newName.Append("_Blanka");
-                    if (ChunLiCheckBox.Checked)
-                        newName.Append("_Chun Li");
-                    if (DhalsimCheckBox.Checked)
-                        newName.Append("_Dhalsim");
-                    if (EHondaCheckBox.Checked)
-                        newName.Append("_E. Honda");
-                    if (GuileCheckBox.Checked)
-                        newName.Append("_Guile");
-                    if (KenCheckBox.Checked)
-                        newName.Append("_Ken");
-                    if (RyuCheckBox.Checked)
-                        newName.Append("_Ryu");
-                    if (ZangiefCheckBox.Checked)
-                        newName.Append("_Zangief");
-                    #endregion
                     break;
                 default:
                     MessageBox.Show($"UNRECOGNIZED RADIO BUTTON: {rb.Name}");
                     break;
             }
+            #endregion
+            #region tags
+            /**if the selected text in the characters dropdownlists is not null or whitespace,
+              * then add their ID as a tag
+              */
+
+            // add player one
+            if (PlayerOneComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerOneComboBox.SelectedItem.ToString()))
+                newName.Append($"_{PlayerOneComboBox.SelectedItem.ToString()}");
+
+            // add player two
+            // TODO: only allow player 2 to be selected in the form when player 1 is not null or whitespace
+            if (PlayerTwoComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerTwoComboBox.SelectedItem.ToString()))
+                newName.Append($"_{PlayerTwoComboBox.SelectedItem.ToString()}");
             #endregion
 
             // append a unique identifier and file extension
@@ -178,49 +150,49 @@ namespace ImageLabelerForImageRecognition
 
         private void MortalKombatRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeGame("Mortal Kombat", MortalKombatGroupBox);
-        }
-
-        private void DisableTagsExcept(string game)
-        {
-            #region Mortal Kombat
-            //if game is not MK
-            if (!game.Equals("Mortal Kombat"))
-            {
-                //disable the MK GroupBox
-                MortalKombatGroupBox.Enabled = false;
-                //and uncheck all checkboxes in the MK GroupBox
-                foreach (CheckBox cb in MortalKombatGroupBox.Controls.OfType<CheckBox>())
-                {
-                    cb.Checked = false;
-                }
-            }
-            #endregion
-            #region Street Fighter II
-            //if game is not SF2
-            if (!game.Equals("Street Fighter II"))
-            {
-                //disable the SF2 GroupBox
-                StreetFighter2GroupBox.Enabled = false;
-                //and uncheck all checkboxes in the SF2 GroupBox
-                foreach (CheckBox cb in StreetFighter2GroupBox.Controls.OfType<CheckBox>())
-                {
-                    cb.Checked = false;
-                }
-            }
-            #endregion
+            ChangeGame("Mortal Kombat");
         }
 
         private void StreetFighter2RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeGame("Street Fighter II", StreetFighter2GroupBox);
+            ChangeGame("Street Fighter II");
         }
 
-        private void ChangeGame(string game, GroupBox gb)
+        private void ChangeGame(string game)
         {
-            DisableTagsExcept(game);
+            /*DisableTagsExcept(game);
             //re-enable the GroupBox related to the selected game
-            gb.Enabled = true;
+            gb.Enabled = true;*/
+            
+            ComboBox.ObjectCollection p1chars = PlayerOneComboBox.Items;
+            ComboBox.ObjectCollection p2chars = PlayerTwoComboBox.Items;
+
+            switch (game)
+            {
+                case "Mortal Kombat":
+                    #region Player One
+                    p1chars.Clear();
+                    p1chars.AddRange(new[] { " ", "Cage", "Kano", "Liu Kang", "Raiden", "Scorpion", "Sonya", "Sub-Zero" });
+                    #endregion
+                    #region Player Two
+                    p2chars.Clear();
+                    p2chars.AddRange(new[] { " ", "Cage", "Goro", "Kano", "Liu Kang", "Raiden", "Scorpion", "Shang Tsung", "Sonya", "Sub-Zero" });
+                    #endregion
+                    break;
+                case "Street Fighter II":
+                    #region Player One
+                    p1chars.Clear();
+                    p1chars.AddRange(new[] { " ", "Blanka", "Chun Li", "Dhalsim", "E. Honda", "Guile", "Ken", "Ryu", "Zangief" });
+                    #endregion
+                    #region Player Two
+                    p2chars.Clear();
+                    p2chars.AddRange(new[] { " ", "Blanka", "Chun Li", "Dhalsim", "E. Honda", "Guile", "Ken", "Ryu", "Zangief" });
+                    #endregion
+                    break;
+                default:
+                    MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
+                    break;
+            }
         }
     }
 }
