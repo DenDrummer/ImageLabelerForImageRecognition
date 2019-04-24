@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace ImageLabelerForImageRecognition
     {
         private string[] files;
         private int currentFile = -1;
+        private Game game;
+        //private int players = 0;
 
         public ImageLabelerForm()
         {
@@ -20,15 +24,14 @@ namespace ImageLabelerForImageRecognition
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
             OpenFolder();
+            GameComboBox.Items.Clear();
+            string[] games = Enum.GetNames(typeof(Game));
+            GameComboBox.Items.AddRange(games);
         }
 
         private void OpenFolder()
         {
             #region open folder
-            //create a new folder browser dialog
-            //(now part of the actual form)
-            //FolderBrowserDialog fbd = new FolderBrowserDialog(); 
-
             bool validFolder = false;
             //keep asking for a new folder until a valid folder has been selected
             while (!validFolder)
@@ -102,36 +105,35 @@ namespace ImageLabelerForImageRecognition
             StringBuilder newName = new StringBuilder();
 
             #region find game
-            //find selected radio button. each radio button corresponds to a game
-            RadioButton rb = GameGroupBox.Controls.OfType<RadioButton>().First(r => r.Checked);
-            switch (rb.Name)
-            {
-                case "MortalKombatRadioButton":
-                    //set game
-                    newName.Append("MK");
-                    break;
-                case "StreetFighter2RadioButton":
-                    //set game
-                    newName.Append("SF2");
-                    break;
-                default:
-                    MessageBox.Show($"UNRECOGNIZED RADIO BUTTON: {rb.Name}");
-                    break;
-            }
+            //set game
+            newName.Append(game.ToString().Replace('_', ' '));
             #endregion
             #region tags
             /**if the selected text in the characters dropdownlists is not null or whitespace,
               * then add their ID as a tag
               */
 
+            // add players in integer form
+            int players = 0;
+            if (PlayerOneCheckBox.Checked)
+            {
+                players += 1;
+            }
+            if (PlayerTwoCheckBox.Checked)
+            {
+                players += 2;
+            }
+            newName.Append($"_{players}");
+
             // add player one
+            newName.Append("_");
             if (PlayerOneComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerOneComboBox.SelectedItem.ToString()))
-                newName.Append($"_{PlayerOneComboBox.SelectedItem.ToString()}");
+                newName.Append($"{PlayerOneComboBox.SelectedItem.ToString()}");
 
             // add player two
-            // TODO: only allow player 2 to be selected in the form when player 1 is not null or whitespace
+            newName.Append("_");
             if (PlayerTwoComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerTwoComboBox.SelectedItem.ToString()))
-                newName.Append($"_{PlayerTwoComboBox.SelectedItem.ToString()}");
+                newName.Append($"{PlayerTwoComboBox.SelectedItem.ToString()}");
             #endregion
 
             // append a unique identifier and file extension
@@ -148,51 +150,128 @@ namespace ImageLabelerForImageRecognition
             #endregion
         }
 
-        private void MortalKombatRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void UpdateGame(Game game)
         {
-            ChangeGame("Mortal Kombat");
-        }
-
-        private void StreetFighter2RadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeGame("Street Fighter II");
-        }
-
-        private void ChangeGame(string game)
-        {
-            /*DisableTagsExcept(game);
-            //re-enable the GroupBox related to the selected game
-            gb.Enabled = true;*/
-            
             ComboBox.ObjectCollection p1chars = PlayerOneComboBox.Items;
             ComboBox.ObjectCollection p2chars = PlayerTwoComboBox.Items;
 
             switch (game)
             {
-                case "Mortal Kombat":
-                    #region Player One
+                case Game.Mortal_Kombat:
+                    #region mk1
+                    List<string> mk1Chars = new List<string>() { " ", "Cage", "Kano", "Liu Kang", "Raiden", "Scorpion", "Sonya", "Sub-Zero" };
+                    mk1Chars.Sort();
+
                     p1chars.Clear();
-                    p1chars.AddRange(new[] { " ", "Cage", "Kano", "Liu Kang", "Raiden", "Scorpion", "Sonya", "Sub-Zero" });
-                    #endregion
-                    #region Player Two
+                    p1chars.AddRange(mk1Chars.ToArray());
+
+                    mk1Chars.AddRange(new string[] { "Goro", "Shang Tsung" });
+                    mk1Chars.Sort();
+
                     p2chars.Clear();
-                    p2chars.AddRange(new[] { " ", "Cage", "Goro", "Kano", "Liu Kang", "Raiden", "Scorpion", "Shang Tsung", "Sonya", "Sub-Zero" });
+                    p2chars.AddRange(mk1Chars.ToArray());
                     #endregion
+                    UpdatePlayers();
                     break;
-                case "Street Fighter II":
-                    #region Player One
+                case Game.Pang:
+                    #region pang
                     p1chars.Clear();
-                    p1chars.AddRange(new[] { " ", "Blanka", "Chun Li", "Dhalsim", "E. Honda", "Guile", "Ken", "Ryu", "Zangief" });
-                    #endregion
-                    #region Player Two
                     p2chars.Clear();
-                    p2chars.AddRange(new[] { " ", "Blanka", "Chun Li", "Dhalsim", "E. Honda", "Guile", "Ken", "Ryu", "Zangief" });
                     #endregion
+                    UpdatePlayers();
+                    break;
+                case Game.Super_Street_Fighter_II_Turbo:
+                    #region ssf2t
+                    List<string> ssf2tChars = new List<string>() { " ", "Balrog", "Blanka", "Cammy", "Dee Jay", "Chun Li", "Dhalsim", "E. Honda", "Fei Long", "Guile", "Ken", "M. Bison", "Ryu", "Sagat", "T. Hawk", "Vega", "Zangief" };
+                    ssf2tChars.Sort();
+
+                    p1chars.Clear();
+                    p1chars.AddRange(ssf2tChars.ToArray());
+
+                    p2chars.Clear();
+                    p2chars.AddRange(ssf2tChars.ToArray());
+                    #endregion
+                    UpdatePlayers();
                     break;
                 default:
                     MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
                     break;
             }
+        }
+
+        private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (GameComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(GameComboBox.SelectedItem.ToString()))
+            {
+                PlayerOneCheckBox.Enabled = true;
+                PlayerTwoCheckBox.Enabled = true;
+                foreach (Game game in Enum.GetValues(typeof(Game)))
+                {
+                    if (GameComboBox.SelectedItem.ToString().Replace(' ', '_').Equals(game.ToString()))
+                    {
+                        this.game = game;
+                        UpdateGame(game);
+                    }
+                }
+            }
+            else
+            {
+                PlayerOneCheckBox.Enabled = false;
+                PlayerTwoCheckBox.Enabled = false;
+            }
+        }
+
+        private void UpdatePlayers()
+        {
+            #region determine playercount
+            //set playercount to 0
+            int players = 0;
+
+            //if the current game is not a game without player-selection
+            if (!game.Equals(Game.Pang))
+            {
+                //parse the players from the playercount dropdownlist
+                players = 2;
+            }
+            #endregion
+            #region en-/disable comboboxes
+            switch (players)
+            {
+                case 0:
+                    PlayerOneComboBox.Enabled = false;
+                    PlayerTwoComboBox.Enabled = false;
+                    break;
+                case 1:
+                    PlayerOneComboBox.Enabled = true;
+                    PlayerTwoComboBox.Enabled = false;
+                    break;
+                case 2:
+                    PlayerOneComboBox.Enabled = true;
+                    PlayerTwoComboBox.Enabled = true;
+                    break;
+                case 3:
+                    PlayerOneComboBox.Enabled = false;
+                    PlayerTwoComboBox.Enabled = true;
+                    break;
+                default:
+                    break;
+            }
+            #endregion
+        }
+
+        private void PlayersComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePlayers();
+        }
+
+        private void PlayerOneCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PlayerTwoCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
