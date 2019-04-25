@@ -123,7 +123,7 @@
             // 
             // nextImageButton
             // 
-            this.nextImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nextImageButton.Font = new System.Drawing.Font("Lucida Console", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nextImageButton.Location = new System.Drawing.Point(395, 528);
             this.nextImageButton.Name = "nextImageButton";
@@ -145,7 +145,7 @@
             // 
             // CharacterGroupBox
             // 
-            this.CharacterGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CharacterGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CharacterGroupBox.Controls.Add(this.PlayerTwoComboBox);
             this.CharacterGroupBox.Controls.Add(this.PlayerTwoLabel);
             this.CharacterGroupBox.Controls.Add(this.PlayerOneComboBox);

@@ -11,9 +11,9 @@ namespace ImageLabelerForImageRecognition
     public partial class ImageLabelerForm : Form
     {
         private string[] files;
-        private int currentFile = -1;
+        private int currentFileId = -1;
         private Game game;
-        //private int players = 0;
+        private string idStorePath;
 
         public ImageLabelerForm()
         {
@@ -23,6 +23,17 @@ namespace ImageLabelerForImageRecognition
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
             OpenFolder();
+
+            //TODO: get last id from txt file
+            if (File.Exists(idStorePath))
+            {
+                currentFileId = int.Parse(File.ReadAllText(idStorePath));
+            }
+            else
+            {
+                File.CreateText(idStorePath).Close();
+            }
+
             GameComboBox.Items.Clear();
             string[] games = Enum.GetNames(typeof(Game));
             for (int i = 0; i < games.Length; i++)
@@ -47,6 +58,9 @@ namespace ImageLabelerForImageRecognition
                 {
                     //load all file names (including the full path)
                     files = Directory.GetFiles(fbd.SelectedPath);
+
+                    idStorePath = $"{fbd.SelectedPath}\\_last_id.txt";
+
                     //TODO: filter only images
                     //TODO: allow recursive search
                     //indicate a valid folder has been found so the loop can be exited
@@ -76,12 +90,12 @@ namespace ImageLabelerForImageRecognition
         {
             #region unless last image
             //if you're not on the last image
-            if (currentFile < files.Length - 1)
+            if (currentFileId < files.Length - 1)
             {
                 //load image into the picturebox
-                PictureBox.Image = Image.FromFile(files[++currentFile]);
+                PictureBox.Image = Image.FromFile(files[++currentFileId]);
                 //load filename with full path to the label
-                FileNameLabel.Text = files[currentFile];
+                FileNameLabel.Text = files[currentFileId];
                 //to only use the file name without the full path, add the code below to the line above
                 //.Split('/').Last();
             }
@@ -150,16 +164,24 @@ namespace ImageLabelerForImageRecognition
             #endregion
 
             // append a unique identifier and file extension
-            newName.Append($"_{currentFile}.jpg");
+            newName.Append($"_{currentFileId}.jpg");
             #endregion
             
             #region rename file
             //get the pathe to the folder where the image was found
-            string path = files[currentFile].Substring(0, files[currentFile].LastIndexOf('\\'));
+            string path = files[currentFileId].Substring(0, files[currentFileId].LastIndexOf('\\'));
             //dispose original image so it's no longer used by the program and it can be renamed
             PictureBox.Image.Dispose();
             //rename file
-            File.Move(files[currentFile], $"{path}\\{newName.ToString()}");
+            File.Move(files[currentFileId], $"{path}\\{newName.ToString()}");
+            #endregion
+
+            #region update id in txt file
+            if (!File.Exists(idStorePath))
+            {
+                File.Create(idStorePath).Close();
+            }
+            File.WriteAllText(idStorePath, currentFileId.ToString());
             #endregion
         }
 
@@ -200,6 +222,7 @@ namespace ImageLabelerForImageRecognition
                         "Obelix" });
                     #endregion
                     break;
+                case Game.Astyanax:
                 case Game.Frogger:
                 case Game.Galaga_88:
                 case Game.Galaxian:
@@ -359,6 +382,7 @@ namespace ImageLabelerForImageRecognition
 
             //if the current game is a game with player-selection
             if (game.Equals(Game.Asterix) ||
+                game.Equals(Game.Astyanax) ||
                 game.Equals(Game.Mortal_Kombat) ||
                 game.Equals(Game.Street_Fighter_II_Champion_Edition) ||
                 game.Equals(Game.Street_Fighter_III_New_Generation) ||
