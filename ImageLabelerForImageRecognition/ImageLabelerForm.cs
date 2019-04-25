@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ImageLabelerForImageRecognition
@@ -26,6 +25,10 @@ namespace ImageLabelerForImageRecognition
             OpenFolder();
             GameComboBox.Items.Clear();
             string[] games = Enum.GetNames(typeof(Game));
+            for (int i = 0; i < games.Length; i++)
+            {
+                games[i] = GameToString(games[i]);
+            }
             GameComboBox.Items.AddRange(games);
         }
 
@@ -52,7 +55,7 @@ namespace ImageLabelerForImageRecognition
                 else if (result == DialogResult.Cancel || result == DialogResult.Abort)
                 {
                     DialogResult dr = MessageBox.Show("Are you sure you wish to exit the program?", "", MessageBoxButtons.OKCancel);
-                    if (dr == DialogResult.OK)
+                    if (dr == DialogResult.OK || dr == DialogResult.Yes)
                     {
                         Application.Exit();
                     }
@@ -71,14 +74,19 @@ namespace ImageLabelerForImageRecognition
 
         private void NextFile()
         {
+            #region unless last image
             //if you're not on the last image
             if (currentFile < files.Length - 1)
             {
                 //load image into the picturebox
                 PictureBox.Image = Image.FromFile(files[++currentFile]);
                 //load filename with full path to the label
-                FileNameLabel.Text = files[currentFile]; //.Split('/').Last();
+                FileNameLabel.Text = files[currentFile];
+                //to only use the file name without the full path, add the code below to the line above
+                //.Split('/').Last();
             }
+            #endregion
+            #region at last image
             else
             {
                 DialogResult dr = MessageBox.Show("No more images to label in this folder.\nWould you like to convert another folder?", "No more images", MessageBoxButtons.YesNo);
@@ -91,6 +99,7 @@ namespace ImageLabelerForImageRecognition
                     OpenFolder();
                 }
             }
+            #endregion
         }
 
         private void NextImageButton_Click(object sender, EventArgs e)
@@ -106,13 +115,14 @@ namespace ImageLabelerForImageRecognition
 
             #region find game
             //set game
-            newName.Append(game.ToString().Replace('_', ' '));
+            newName.Append(GameToString(game.ToString()));
             #endregion
             #region tags
             /**if the selected text in the characters dropdownlists is not null or whitespace,
               * then add their ID as a tag
               */
 
+            #region players
             // add players in integer form
             int players = 0;
             if (PlayerOneCheckBox.Checked)
@@ -124,7 +134,9 @@ namespace ImageLabelerForImageRecognition
                 players += 2;
             }
             newName.Append($"_{players}");
+            #endregion
 
+            #region player characters
             // add player one
             newName.Append("_");
             if (PlayerOneComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerOneComboBox.SelectedItem.ToString()))
@@ -135,11 +147,12 @@ namespace ImageLabelerForImageRecognition
             if (PlayerTwoComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(PlayerTwoComboBox.SelectedItem.ToString()))
                 newName.Append($"{PlayerTwoComboBox.SelectedItem.ToString()}");
             #endregion
+            #endregion
 
             // append a unique identifier and file extension
             newName.Append($"_{currentFile}.jpg");
             #endregion
-
+            
             #region rename file
             //get the pathe to the folder where the image was found
             string path = files[currentFile].Substring(0, files[currentFile].LastIndexOf('\\'));
@@ -150,53 +163,103 @@ namespace ImageLabelerForImageRecognition
             #endregion
         }
 
+        private string GameToString(string game)
+            => game.Replace('_', ' ').Trim();
+
+        private string StringToGame(string game)
+        {
+            string regex = "^\\d";
+            if (Regex.IsMatch(game, regex))
+            {
+                game = $"_{game}";
+            }
+            return game.Replace(' ', '_');
+        }
+
         private void UpdateGame(Game game)
         {
-            ComboBox.ObjectCollection p1chars = PlayerOneComboBox.Items;
-            ComboBox.ObjectCollection p2chars = PlayerTwoComboBox.Items;
+            ComboBox.ObjectCollection p1charlist = PlayerOneComboBox.Items;
+            ComboBox.ObjectCollection p2charlist = PlayerTwoComboBox.Items;
+
+            //reset game label color
+            GameLabel.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+
+            #region fill char lists
+            List<string> chars = new List<string>() { " " };
+            List<string> p1chars = new List<string>();
+            List<string> p2chars = new List<string>();
 
             switch (game)
             {
-                case Game.Mortal_Kombat:
-                    #region mk1
-                    List<string> mk1Chars = new List<string>() { " ", "Cage", "Kano", "Liu Kang", "Raiden", "Scorpion", "Sonya", "Sub-Zero" };
-                    mk1Chars.Sort();
-
-                    p1chars.Clear();
-                    p1chars.AddRange(mk1Chars.ToArray());
-
-                    mk1Chars.AddRange(new string[] { "Goro", "Shang Tsung" });
-                    mk1Chars.Sort();
-
-                    p2chars.Clear();
-                    p2chars.AddRange(mk1Chars.ToArray());
+                case Game._1943:
+                    break;
+                case Game.Asterix:
+                    #region Asterix chars
+                    chars.AddRange(new string[] {
+                        "Asterix",
+                        "Obelix" });
                     #endregion
-                    UpdatePlayers();
+                    break;
+                case Game.Frogger:
+                    break;
+                case Game.Gyruss:
+                    break;
+                case Game.Mortal_Kombat:
+                    #region mk chars
+                    chars.AddRange(new string[] {
+                        "Cage",
+                        "Kano",
+                        "Liu Kang",
+                        "Raiden",
+                        "Scorpion",
+                        "Sonya",
+                        "Sub-Zero" });
+
+                    p2chars.AddRange(new string[] {
+                        "Goro",
+                        "Shang Tsung" });
+                    #endregion
                     break;
                 case Game.Pang:
-                    #region pang
-                    p1chars.Clear();
-                    p2chars.Clear();
-                    #endregion
-                    UpdatePlayers();
                     break;
                 case Game.Super_Street_Fighter_II_Turbo:
-                    #region ssf2t
-                    List<string> ssf2tChars = new List<string>() { " ", "Balrog", "Blanka", "Cammy", "Dee Jay", "Chun Li", "Dhalsim", "E. Honda", "Fei Long", "Guile", "Ken", "M. Bison", "Ryu", "Sagat", "T. Hawk", "Vega", "Zangief" };
-                    ssf2tChars.Sort();
-
-                    p1chars.Clear();
-                    p1chars.AddRange(ssf2tChars.ToArray());
-
-                    p2chars.Clear();
-                    p2chars.AddRange(ssf2tChars.ToArray());
+                    #region ssf2t chars
+                    chars.AddRange(new string[] {
+                        "Balrog",
+                        "Blanka",
+                        "Cammy",
+                        "Dee Jay",
+                        "Chun Li",
+                        "Dhalsim",
+                        "E. Honda",
+                        "Fei Long",
+                        "Guile",
+                        "Ken",
+                        "M. Bison",
+                        "Ryu",
+                        "Sagat",
+                        "T. Hawk",
+                        "Vega",
+                        "Zangief" });
                     #endregion
-                    UpdatePlayers();
                     break;
                 default:
-                    MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
+                    GameLabel.ForeColor = Color.Red;
+                    //MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
                     break;
             }
+            #endregion
+            #region actually update the combobox lists
+            p1charlist.Clear();
+            p1charlist.AddRange(chars.ToArray());
+            p1charlist.AddRange(p1chars.ToArray());
+
+            p2charlist.Clear();
+            p2charlist.AddRange(chars.ToArray());
+            p1charlist.AddRange(p2chars.ToArray());
+
+            UpdatePlayers();
+            #endregion
         }
 
         private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,7 +270,7 @@ namespace ImageLabelerForImageRecognition
                 PlayerTwoCheckBox.Enabled = true;
                 foreach (Game game in Enum.GetValues(typeof(Game)))
                 {
-                    if (GameComboBox.SelectedItem.ToString().Replace(' ', '_').Equals(game.ToString()))
+                    if (StringToGame(GameComboBox.SelectedItem.ToString()).Equals(game.ToString()))
                     {
                         this.game = game;
                         UpdateGame(game);
@@ -227,11 +290,12 @@ namespace ImageLabelerForImageRecognition
             //set playercount to 0
             int players = 0;
 
-            //if the current game is not a game without player-selection
-            if (!game.Equals(Game.Pang))
+            //if the current game is a game with player-selection
+            if (game.Equals(Game.Asterix) ||
+                game.Equals(Game.Mortal_Kombat) ||
+                game.Equals(Game.Super_Street_Fighter_II_Turbo))
             {
-                //parse the players from the playercount dropdownlist
-                players = 2;
+                players = 3;
             }
             #endregion
             #region en-/disable comboboxes
@@ -246,32 +310,17 @@ namespace ImageLabelerForImageRecognition
                     PlayerTwoComboBox.Enabled = false;
                     break;
                 case 2:
-                    PlayerOneComboBox.Enabled = true;
+                    PlayerOneComboBox.Enabled = false;
                     PlayerTwoComboBox.Enabled = true;
                     break;
                 case 3:
-                    PlayerOneComboBox.Enabled = false;
+                    PlayerOneComboBox.Enabled = true;
                     PlayerTwoComboBox.Enabled = true;
                     break;
                 default:
                     break;
             }
             #endregion
-        }
-
-        private void PlayersComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePlayers();
-        }
-
-        private void PlayerOneCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PlayerTwoCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

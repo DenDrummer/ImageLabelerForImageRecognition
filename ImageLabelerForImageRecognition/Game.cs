@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ImageLabelerForImageRecognition
+﻿namespace ImageLabelerForImageRecognition
 {
     enum Game
     {
+        _1943,
+        Asterix,
+        Astyanax,
+        Contra,
+        Donkey_Kong,
+        Double_Dragon,
+        Frogger,
+        Gyruss,
         Mortal_Kombat,
         Pang,
         Super_Street_Fighter_II_Turbo
