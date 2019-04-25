@@ -201,8 +201,33 @@ namespace ImageLabelerForImageRecognition
                     #endregion
                     break;
                 case Game.Frogger:
-                    break;
+                case Game.Galaga_88:
+                case Game.Galaxian:
                 case Game.Gyruss:
+                case Game.Mario_Bros:
+                    break;
+                case Game.Marvel_Super_Heroes_vs_Street_Fighter:
+                    #region mshVSsf
+                    chars.AddRange(new string[]
+                    {
+                        "Akuma",
+                        "Bison",
+                        "Blackheart",
+                        "Captain America",
+                        "Chun-Li",
+                        "Cyclops",
+                        "Dan",
+                        "Dhalsim",
+                        "Hulk",
+                        "Ken",
+                        "Omega Red",
+                        "Ryu",
+                        "Sakura",
+                        "Shuma-Gurath",
+                        "Spiderman",
+                        "Zangief"
+                    });
+                    #endregion
                     break;
                 case Game.Mortal_Kombat:
                     #region mk chars
@@ -222,8 +247,48 @@ namespace ImageLabelerForImageRecognition
                     break;
                 case Game.Pang:
                     break;
+                case Game.Sonic_The_Hedgehog_II:
+                    #region sth2 chars
+                    p1chars.Add("Sonic");
+                    p2chars.Add("Tails");
+                    #endregion
+                    break;
+                case Game.Street_Fighter_II_Champion_Edition:
+                    #region sf2ce chars
+                    chars.AddRange(new string[]
+                    {
+                        "Balrog",
+                        "Blanka",
+                        "Chun Li",
+                        "Dhalsim",
+                        "E. Honda",
+                        "Guile",
+                        "Ken",
+                        "M. Bison",
+                        "Ryu",
+                        "Sagat",
+                        "Vega",
+                        "Zangief" });
+                    #endregion
+                    break;
+                case Game.Street_Fighter_III_New_Generation:
+                    #region sf3ng chars
+                    chars.AddRange(new string[] {
+                        "Alex",
+                        "Dudley",
+                        "Elena",
+                        "Ibuki",
+                        "Ken",
+                        "Necro",
+                        "Oro",
+                        "Ryu",
+                        "Sean",
+                        "Yun" });
+                    #endregion
+                    break;
+                case Game.Super_Street_Fighter_II_The_New_Challenger:
                 case Game.Super_Street_Fighter_II_Turbo:
-                    #region ssf2t chars
+                    #region ssf2 chars
                     chars.AddRange(new string[] {
                         "Balrog",
                         "Blanka",
@@ -248,6 +313,8 @@ namespace ImageLabelerForImageRecognition
                     //MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
                     break;
             }
+
+            //remove the empty ones from the p1 and p2 exclusive lists
             #endregion
             #region actually update the combobox lists
             p1charlist.Clear();
@@ -256,7 +323,7 @@ namespace ImageLabelerForImageRecognition
 
             p2charlist.Clear();
             p2charlist.AddRange(chars.ToArray());
-            p1charlist.AddRange(p2chars.ToArray());
+            p2charlist.AddRange(p2chars.ToArray());
 
             UpdatePlayers();
             #endregion
@@ -293,7 +360,14 @@ namespace ImageLabelerForImageRecognition
             //if the current game is a game with player-selection
             if (game.Equals(Game.Asterix) ||
                 game.Equals(Game.Mortal_Kombat) ||
+                game.Equals(Game.Street_Fighter_II_Champion_Edition) ||
+                game.Equals(Game.Street_Fighter_III_New_Generation) ||
+                game.Equals(Game.Super_Street_Fighter_II_The_New_Challenger) ||
                 game.Equals(Game.Super_Street_Fighter_II_Turbo))
+            {
+                players = 3;
+            }
+            else if (game.Equals(Game.Sonic_The_Hedgehog_II))
             {
                 players = 3;
             }
