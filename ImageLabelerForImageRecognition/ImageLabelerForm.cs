@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -23,8 +24,7 @@ namespace ImageLabelerForImageRecognition
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
             OpenFolder();
-
-            //TODO: get last id from txt file
+            
             if (File.Exists(idStorePath))
             {
                 currentFileId = int.Parse(File.ReadAllText(idStorePath));
@@ -41,6 +41,7 @@ namespace ImageLabelerForImageRecognition
                 games[i] = GameToString(games[i]);
             }
             GameComboBox.Items.AddRange(games);
+            GameComboBox.SelectedIndex = 0;
         }
 
         private void OpenFolder()
@@ -56,13 +57,15 @@ namespace ImageLabelerForImageRecognition
                 #region result handling
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    //load all file names (including the full path)
-                    files = Directory.GetFiles(fbd.SelectedPath);
+                    /** load all file names (including the full path)
+                      * fbd.SelectedPath            :   the "root" folder
+                      * "*.jpg"                     :   only load .jpg images
+                      * SearchOption.AllDirectories :   also look in subdirectories
+                      */
+                    files = Directory.GetFiles(fbd.SelectedPath, "*.jpg", SearchOption.AllDirectories);
 
                     idStorePath = $"{fbd.SelectedPath}\\_last_id.txt";
-
-                    //TODO: filter only images
-                    //TODO: allow recursive search
+                    
                     //indicate a valid folder has been found so the loop can be exited
                     validFolder = true;
                 } //if the folder browsing is canceled or aborted
@@ -92,12 +95,32 @@ namespace ImageLabelerForImageRecognition
             //if you're not on the last image
             if (currentFileId < files.Length - 1)
             {
-                //load image into the picturebox
-                PictureBox.Image = Image.FromFile(files[++currentFileId]);
-                //load filename with full path to the label
-                FileNameLabel.Text = files[currentFileId];
-                //to only use the file name without the full path, add the code below to the line above
-                //.Split('/').Last();
+                bool unconvertedImage = false;
+                while (!unconvertedImage)
+                {
+                    string convertedFileName = "[a-zA-Z 0-9]*_[0-3](_[a-zA-Z. -]{2}_[0-9]+.jpg";
+
+                    //if the file has not been converted yet
+                    if (!Regex.IsMatch(files[currentFileId].Split('/').Last(), convertedFileName))
+                    {
+                        #region unconverted image
+                        //load image into the picturebox
+                        PictureBox.Image = Image.FromFile(files[++currentFileId]);
+                        //load filename with full path to the label
+                        FileNameLabel.Text = files[currentFileId];
+                        //to only use the file name without the full path, add the code below to the line above
+                        //.Split('/').Last();
+
+                        //exit while loop
+                        unconvertedImage = true;
+                        #endregion
+                    }
+                    else
+                    {
+                        //if already converted move to the next file
+                        currentFileId++;
+                    }
+                }
             }
             #endregion
             #region at last image
@@ -128,6 +151,8 @@ namespace ImageLabelerForImageRecognition
             StringBuilder newName = new StringBuilder();
 
             #region find game
+            // get current game
+            string currGame = GameToString(game.ToString());
             //set game
             newName.Append(GameToString(game.ToString()));
             #endregion
@@ -195,6 +220,10 @@ namespace ImageLabelerForImageRecognition
             {
                 game = $"_{game}";
             }
+            else if (string.IsNullOrWhiteSpace(game))
+            {
+                game = "_";
+            }
             return game.Replace(' ', '_');
         }
 
@@ -203,6 +232,8 @@ namespace ImageLabelerForImageRecognition
             ComboBox.ObjectCollection p1charlist = PlayerOneComboBox.Items;
             ComboBox.ObjectCollection p2charlist = PlayerTwoComboBox.Items;
 
+            //reset next-image-button
+            nextImageButton.Enabled = true;
             //reset game label color
             GameLabel.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
 
@@ -213,24 +244,54 @@ namespace ImageLabelerForImageRecognition
 
             switch (game)
             {
+                case Game._:
                 case Game._1943:
-                    break;
-                case Game.Asterix:
-                    #region Asterix chars
-                    chars.AddRange(new string[] {
-                        "Asterix",
-                        "Obelix" });
-                    #endregion
-                    break;
                 case Game.Astyanax:
+                case Game.Donkey_Kong:
+                case Game.Double_Dragon:
                 case Game.Frogger:
                 case Game.Galaga_88:
                 case Game.Galaxian:
                 case Game.Gyruss:
+                case Game.Metal_Slug:
+                case Game.Pang:
+                case Game.Tetris:
+                case Game.Space_Invaders_Part_II:
+                    break;
+                case Game.Asterix:
+                    #region Asterix chars
+                    chars.AddRange(new string[]
+                    {
+                        "Asterix",
+                        "Obelix"
+                    });
+                    #endregion
+                    break;
+                case Game.Contra:
+                    #region Contra chars
+                    p1chars.Add("Bill");
+                    p2chars.Add("Lance");
+                    #endregion
+                    break;
+                case Game.Golden_Axe_The_Revenge_Of_Death_Adder:
+                    #region GATRODA chars
+                    chars.AddRange(new string[]
+                    {
+                        "Dora",
+                        "Goah",
+                        "Sternblade",
+                        "Trix"
+                    });
+                    #endregion
+                    break;
                 case Game.Mario_Bros:
+                    #region MaBro chars
+                    p1chars.Add("Mario");
+                    p2chars.Add("Luigi");
+                    #endregion
                     break;
                 case Game.Marvel_Super_Heroes_vs_Street_Fighter:
-                    #region mshVSsf
+                    #region MaSHeVStreF chars
                     chars.AddRange(new string[]
                     {
                         "Akuma",
@@ -253,31 +314,46 @@ namespace ImageLabelerForImageRecognition
                     #endregion
                     break;
                 case Game.Mortal_Kombat:
-                    #region mk chars
-                    chars.AddRange(new string[] {
+                    #region MoKo chars
+                    #region playable
+                    chars.AddRange(new string[]
+                    {
                         "Cage",
                         "Kano",
                         "Liu Kang",
                         "Raiden",
                         "Scorpion",
                         "Sonya",
-                        "Sub-Zero" });
-
-                    p2chars.AddRange(new string[] {
+                        "Sub-Zero"
+                    });
+                    #endregion
+                    #region bosses
+                    p2chars.AddRange(new string[]
+                    {
                         "Goro",
-                        "Shang Tsung" });
+                        "Shang Tsung"
+                    });
+                    #endregion
                     #endregion
                     break;
-                case Game.Pang:
+                case Game.Sega_Sonic_The_Hedgehog:
+                    #region SeSTHe chars
+                    chars.AddRange(new string[]
+                    {
+                        "Mighty",
+                        "Ray",
+                        "Sonic"
+                    });
+                    #endregion
                     break;
                 case Game.Sonic_The_Hedgehog_II:
-                    #region sth2 chars
+                    #region SoTH2 chars
                     p1chars.Add("Sonic");
                     p2chars.Add("Tails");
                     #endregion
                     break;
                 case Game.Street_Fighter_II_Champion_Edition:
-                    #region sf2ce chars
+                    #region StreF2ChE chars
                     chars.AddRange(new string[]
                     {
                         "Balrog",
@@ -291,12 +367,14 @@ namespace ImageLabelerForImageRecognition
                         "Ryu",
                         "Sagat",
                         "Vega",
-                        "Zangief" });
+                        "Zangief"
+                    });
                     #endregion
                     break;
                 case Game.Street_Fighter_III_New_Generation:
-                    #region sf3ng chars
-                    chars.AddRange(new string[] {
+                    #region StreF3NeG chars
+                    chars.AddRange(new string[]
+                    {
                         "Alex",
                         "Dudley",
                         "Elena",
@@ -306,13 +384,15 @@ namespace ImageLabelerForImageRecognition
                         "Oro",
                         "Ryu",
                         "Sean",
-                        "Yun" });
+                        "Yun"
+                    });
                     #endregion
                     break;
                 case Game.Super_Street_Fighter_II_The_New_Challenger:
                 case Game.Super_Street_Fighter_II_Turbo:
-                    #region ssf2 chars
-                    chars.AddRange(new string[] {
+                    #region SuStreF2 chars
+                    chars.AddRange(new string[]
+                    {
                         "Balrog",
                         "Blanka",
                         "Cammy",
@@ -328,12 +408,63 @@ namespace ImageLabelerForImageRecognition
                         "Sagat",
                         "T. Hawk",
                         "Vega",
-                        "Zangief" });
+                        "Zangief"
+                    });
+                    #endregion
+                    break;
+                case Game.The_King_Of_Fighters_96:
+                    #region TheKOF96 chars
+                    #region playable
+                    chars.AddRange(new string[]
+                    {
+                        "Andy Bogard",
+                        "Athena Asamiya",
+                        "Benimaru Nikaido",
+                        "Chang Koehan",
+                        "Chin Gentsai",
+                        "Choi Bounge",
+                        "Clark Still",
+                        "Geese Howard",
+                        "Goro Daimon",
+                        "Iori Yagami",
+                        "Joe Higashi",
+                        "Kasumi Todoh",
+                        "Kim Kaphwan",
+                        "King",
+                        "Kyo Kusanagi",
+                        "Leona Heidern",
+                        "Mai Shiranui",
+                        "Mature",
+                        "Mr. Big",
+                        "Ralf Jones",
+                        "Robert Garcia",
+                        "Ryo Sakazaki",
+                        "Sie Kensou",
+                        "Terry Bogard",
+                        "Vice",
+                        "Wolfgang Krauser",
+                        "Yuri Sakazaki"
+                    });
+                    #endregion
+                    #region bosses
+                    p2chars.AddRange(new string[]
+                    {
+                        "Chizuru Kagura",
+                        "Goenitz"
+                    });
+                    #endregion
+                    #endregion
+                    break;
+                case Game.The_Punisher:
+                    #region TheP chars
+                    p1chars.Add("The Punisher");
+                    p2chars.Add("Nick Fury");
                     #endregion
                     break;
                 default:
+                    //indicate the game hasn't been propperly implemented yet and prevent from labeling
                     GameLabel.ForeColor = Color.Red;
-                    //MessageBox.Show("You selected a game that has not been properly implemented yet. Please check if the devs are aware of this issue.");
+                    nextImageButton.Enabled = false;
                     break;
             }
 
@@ -354,7 +485,7 @@ namespace ImageLabelerForImageRecognition
 
         private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (GameComboBox.SelectedItem != null && !string.IsNullOrWhiteSpace(GameComboBox.SelectedItem.ToString()))
+            if (GameComboBox.SelectedItem != null)
             {
                 PlayerOneCheckBox.Enabled = true;
                 PlayerTwoCheckBox.Enabled = true;
@@ -376,6 +507,8 @@ namespace ImageLabelerForImageRecognition
 
         private void UpdatePlayers()
         {
+            #region old code
+            /*
             #region determine playercount
             //set playercount to 0
             int players = 0;
@@ -418,6 +551,32 @@ namespace ImageLabelerForImageRecognition
                 default:
                     break;
             }
+            #endregion
+            */
+            #endregion
+            #region p1 charlist
+            if (PlayerOneComboBox.Items.Count > 1)
+            {
+                PlayerOneComboBox.Enabled = true;
+            }
+            else
+            {
+                PlayerOneComboBox.Enabled = false;
+            }
+            #endregion
+            #region p1 charlist
+            if (PlayerTwoComboBox.Items.Count > 1)
+            {
+                PlayerTwoComboBox.Enabled = true;
+            }
+            else
+            {
+                PlayerTwoComboBox.Enabled = false;
+            }
+            #endregion
+            #region select defaults
+            PlayerOneComboBox.SelectedIndex = 0;
+            PlayerTwoComboBox.SelectedIndex = 0;
             #endregion
         }
     }

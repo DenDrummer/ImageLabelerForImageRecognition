@@ -2,6 +2,7 @@
 {
     enum Game
     {
+        _,
         _1943,
         Asterix,
         Astyanax,
