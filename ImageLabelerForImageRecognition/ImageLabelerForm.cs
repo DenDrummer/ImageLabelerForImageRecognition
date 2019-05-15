@@ -255,6 +255,7 @@ namespace ImageLabelerForImageRecognition
                 case Game.Gyruss:
                 case Game.Metal_Slug:
                 case Game.Pang:
+                case Game.Puckman:
                 case Game.Tetris:
                 case Game.Space_Invaders_Part_II:
                     break;
@@ -266,6 +267,23 @@ namespace ImageLabelerForImageRecognition
                         "Obelix"
                     });
                     #endregion
+                    break;
+                case Game.Bomberman:
+                    chars.AddRange(new[]
+                    {
+                        "Atomic",
+                        "Black",
+                        "Blue",
+                        "Cat",
+                        "Fake",
+                        "Gold",
+                        "Hayate",
+                        "Honey",
+                        "Kotetu",
+                        "Red",
+                        "Rubber",
+                        "White"
+                    });
                     break;
                 case Game.Contra:
                     #region Contra chars
