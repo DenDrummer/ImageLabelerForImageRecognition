@@ -12,7 +12,7 @@ namespace ImageLabelerForImageRecognition
     public partial class ImageLabelerForm : Form
     {
         private string[] files;
-        private int currentFileId = -1;
+        private int currentFileId = 0;
         private Game game;
         private string idStorePath;
 
@@ -24,7 +24,7 @@ namespace ImageLabelerForImageRecognition
         private void ImageLabelerForm_Load(object sender, EventArgs e)
         {
             OpenFolder();
-            
+
             if (File.Exists(idStorePath))
             {
                 currentFileId = int.Parse(File.ReadAllText(idStorePath));
@@ -65,7 +65,7 @@ namespace ImageLabelerForImageRecognition
                     files = Directory.GetFiles(fbd.SelectedPath, "*.jpg", SearchOption.AllDirectories);
 
                     idStorePath = $"{fbd.SelectedPath}\\_last_id.txt";
-                    
+
                     //indicate a valid folder has been found so the loop can be exited
                     validFolder = true;
                 } //if the folder browsing is canceled or aborted
@@ -91,52 +91,59 @@ namespace ImageLabelerForImageRecognition
 
         private void NextFile()
         {
-            #region unless last image
-            //if you're not on the last image
-            if (currentFileId < files.Length - 1)
+            try
             {
-                bool unconvertedImage = false;
-                while (!unconvertedImage)
+                #region unless last image
+                //if you're not on the last image
+                if (currentFileId < files.Length - 1)
                 {
-                    string convertedFileName = "[a-zA-Z 0-9]*_[0-3](_[a-zA-Z. -]{2}_[0-9]+.jpg";
-
-                    //if the file has not been converted yet
-                    if (!Regex.IsMatch(files[currentFileId].Split('/').Last(), convertedFileName))
+                    bool unconvertedImage = false;
+                    while (!unconvertedImage)
                     {
-                        #region unconverted image
-                        //load image into the picturebox
-                        PictureBox.Image = Image.FromFile(files[++currentFileId]);
-                        //load filename with full path to the label
-                        FileNameLabel.Text = files[currentFileId];
-                        //to only use the file name without the full path, add the code below to the line above
-                        //.Split('/').Last();
+                        string convertedFileName = "[a-zA-Z 0-9]*_[0-3](_[a-zA-Z. -]){2}_[0-9]+.jpg";
 
-                        //exit while loop
-                        unconvertedImage = true;
-                        #endregion
-                    }
-                    else
-                    {
-                        //if already converted move to the next file
-                        currentFileId++;
+                        //if the file has not been converted yet
+                        if (!Regex.IsMatch(files[currentFileId].Split('\\').Last(), convertedFileName))
+                        {
+                            #region unconverted image
+                            //load image into the picturebox
+                            PictureBox.Image = Image.FromFile(files[++currentFileId]);
+                            //load filename with full path to the label
+                            FileNameLabel.Text = files[currentFileId];
+                            //to only use the file name without the full path, add the code below to the line above
+                            //.Split('/').Last();
+
+                            //exit while loop
+                            unconvertedImage = true;
+                            #endregion
+                        }
+                        else
+                        {
+                            //if already converted move to the next file
+                            currentFileId++;
+                        }
                     }
                 }
+                #endregion
+                #region at last image
+                else
+                {
+                    DialogResult dr = MessageBox.Show("No more images to label in this folder.\nWould you like to convert another folder?", "No more images", MessageBoxButtons.YesNo);
+                    if (dr == DialogResult.No)
+                    {
+                        Application.Exit();
+                    }
+                    else if (dr == DialogResult.Yes)
+                    {
+                        OpenFolder();
+                    }
+                }
+                #endregion
             }
-            #endregion
-            #region at last image
-            else
+            catch (IndexOutOfRangeException ioore)
             {
-                DialogResult dr = MessageBox.Show("No more images to label in this folder.\nWould you like to convert another folder?", "No more images", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.No)
-                {
-                    Application.Exit();
-                }
-                else if (dr == DialogResult.Yes)
-                {
-                    OpenFolder();
-                }
+                //do nothing
             }
-            #endregion
         }
 
         private void NextImageButton_Click(object sender, EventArgs e)
